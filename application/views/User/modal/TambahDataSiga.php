@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="col-form-label"> Satuan :</label>
-                            <input class="form-control" type="text" value="" name="satuan" required>
+                            <input readonly class="form-control" type="text" value="Angka" name="satuan" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-form-label"> Tanggal :</label>

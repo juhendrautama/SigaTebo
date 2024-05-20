@@ -66,7 +66,7 @@
                                     echo "<tr>";
                                     echo "<td>" . $no . "</td>";
                                     echo "<td>" . $row->nama . "</td>";
-                                    echo "<td class='text-center'>" . $row->nilaiData . "</td>";
+                                    echo "<td class='text-center'>" . $row->sum_nilaiData . "</td>";
                                     echo "<td>" . $row->satuan . "</td>";
                                     echo "</tr>";
                                     $no++;

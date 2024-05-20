@@ -1,5 +1,4 @@
-<div class="modal fade " id="TambahDataSiga" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade " id="TambahDataSiga" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,8 +13,7 @@
                 <div class="modal-body ">
                     <input hidden type="text" name="idUnitKerja" value="<?php echo $GetDataIdUnit->idUnitKerja ?>">
 
-                    <input hidden type="text" name="idKategoriData"
-                        value="<?php echo $GetDataIdKategori->idKategoriData ?>">
+                    <input hidden type="text" name="idKategoriData" value="<?php echo $GetDataIdKategori->idKategoriData ?>">
 
                     <input hidden type="text" name="idJudulData" value="<?php echo $GetDataIdJudul->idJudulData ?>">
 
@@ -25,7 +23,7 @@
                             <select required name="idElemenData" id="unit" class="form-control" style="width:100%;">
                                 <option value="" disabled selected>Pilih Elemen Data...</option>
                                 <?php foreach ($GetElemenData->result() as $row) { ?>
-                                <option value="<?= $row->idElemenData; ?>"><?= $row->nama; ?></option>
+                                    <option value="<?= $row->idElemenData; ?>"><?= $row->nama; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -37,7 +35,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="col-form-label"> Satuan :</label>
-                            <input class="form-control" type="text" value="" name="satuan" required>
+                            <input readonly class="form-control" type="text" value="Angka" name="satuan" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-form-label"> Tanggal :</label>

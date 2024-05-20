@@ -196,14 +196,46 @@ class M_crud_Data extends CI_Model
 
     public function getDataMaster($idkategori, $idjuduldata)
     {
-        return $this->db->query("SELECT a.*, e.nama FROM `tbl_datadasarmaster` a
-        JOIN tbl_unitkerja b on b.idUnitKerja = a.idUnitKerja
-        JOIN tbl_kategoridata c on c.idKategoriData = a.idKategoriData
-        JOIN tbl_juduldata d on d.idJudulData = a.idJudulData
-        JOIN tbl_elemendata e on e.idElemenData = a.idElemenData
-        WHERE a.idKategoriData = $idkategori 
-        AND a.idJudulData = $idjuduldata
-        AND year(a.tgl) = year(curdate())
+        return $this->db->query("
+        SELECT 
+        tbl_dataDasarMaster.satuan,
+        tbl_elemenData.idElemenData, 
+        tbl_elemenData.idUnitKerja, 
+        tbl_elemenData.idKategoriData, 
+        tbl_elemenData.idJudulData, 
+        tbl_elemenData.nama, 
+        tbl_elemenData.tgl, 
+        SUM(tbl_dataDasarMaster.nilaiData) AS sum_nilaiData
+        FROM 
+            tbl_elemenData
+        LEFT JOIN 
+            tbl_dataDasarMaster 
+            ON tbl_elemenData.idElemenData = tbl_dataDasarMaster.idElemenData 
+            AND YEAR(tbl_dataDasarMaster.tgl) = YEAR(CURRENT_DATE)
+            AND tbl_elemenData.idKategoriData = tbl_dataDasarMaster.idKategoriData
+            AND tbl_elemenData.idJudulData = tbl_dataDasarMaster.idJudulData
+        WHERE 
+            tbl_elemenData.idKategoriData = '$idkategori' 
+            AND tbl_elemenData.idJudulData = '$idjuduldata'
+        GROUP BY 
+            tbl_elemenData.idElemenData, 
+            tbl_elemenData.idUnitKerja, 
+            tbl_elemenData.idKategoriData, 
+            tbl_elemenData.idJudulData, 
+            tbl_elemenData.nama, 
+            tbl_elemenData.tgl,
+            tbl_dataDasarMaster.satuan;
         ");
+
+
+        // return $this->db->query("SELECT a.*, e.nama FROM `tbl_datadasarmaster` a
+        // JOIN tbl_unitkerja b on b.idUnitKerja = a.idUnitKerja
+        // JOIN tbl_kategoridata c on c.idKategoriData = a.idKategoriData
+        // JOIN tbl_juduldata d on d.idJudulData = a.idJudulData
+        // JOIN tbl_elemendata e on e.idElemenData = a.idElemenData
+        // WHERE a.idKategoriData = $idkategori 
+        // AND a.idJudulData = $idjuduldata
+        // AND year(a.tgl) = year(curdate())
+        // ");
     }
 }
