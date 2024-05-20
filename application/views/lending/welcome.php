@@ -4,15 +4,15 @@
 <head>
     <?php $this->load->view('lending/tools/head'); ?>
     <style>
-    .h {
-        transition: box-shadow 0.3s ease;
-        /* Menambahkan transisi halus */
-    }
+        .h {
+            transition: box-shadow 0.3s ease;
+            /* Menambahkan transisi halus */
+        }
 
-    .h:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.10);
-        /* Efek bayangan saat di-hover */
-    }
+        .h:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.10);
+            /* Efek bayangan saat di-hover */
+        }
     </style>
 </head>
 
@@ -43,28 +43,27 @@
                         </font>
                     </center>
                 </div>
-                <div class="card  p-5 border-info">
-                    <div class="row row-cols-2 row-cols-md-3 " data-aos="fade-left">
+                <div class="card  p-4 border-info">
+                    <div class="row row-cols-1 row-cols-md-3 " data-aos="fade-left">
                         <?php foreach ($GetKategoriAll->result() as $row) { ?>
-                        <div class="col p-3">
-                            <a href="Kategori/Detail/<?php echo $row->idKategoriData; ?>/<?php echo str_replace(' ', '-', $row->nama); ?>#Kategori"
-                                class="text-decoration-none text-reset">
-                                <div class="card h rounded-5 p-0" style="width:100%; height:200px;">
-                                    <div class="card-header rounded-top-5">
-                                        <center>
-                                            <font style="font-size:14px; font-weight: bold; color:#0663C4;">
-                                                <?php echo $row->nama ?>
+                            <div class="col p-3">
+                                <a href="Kategori/Detail/<?php echo $row->idKategoriData; ?>/<?php echo str_replace(' ', '-', $row->nama); ?>#Kategori" class="text-decoration-none text-reset">
+                                    <div class="card h rounded-5 p-0" style="width:100%; height:210px;">
+                                        <div class="card-header rounded-top-5">
+                                            <center>
+                                                <font style="font-size:14px; font-weight: bold; color:#0663C4;">
+                                                    <?php echo $row->nama ?>
+                                                </font>
+                                            </center>
+                                        </div>
+                                        <div class="card-body">
+                                            <font style="font-size:11px; text-align: justify;">
+                                                <?php echo $row->Ket ?>
                                             </font>
-                                        </center>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        <font style="font-size:13px; text-align: justify;">
-                                            <?php echo $row->Ket ?>
-                                        </font>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         <?php } ?>
                     </div>
                 </div>

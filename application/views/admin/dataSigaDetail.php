@@ -21,7 +21,8 @@
                 <div class="container-fluid">
                     <div class="card shadow">
                         <div class="card-header">
-                            <a href="adminpanel/DataSigaAdmin/Kategori/<?php echo $GetDataIdUnit->idUnitKerja ?>" class="btn btn-success btn-sm elevation-1">
+                            <a href="adminpanel/DataSigaAdmin/Kategori/<?php echo $GetDataIdUnit->idUnitKerja ?>"
+                                class="btn btn-success btn-sm elevation-1">
                                 <i class="nav-icon  fas fa-reply"></i>
                             </a>
                             <center>
@@ -29,17 +30,20 @@
                             </center>
                         </div>
                         <div class="card-body ">
-                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal" data-target="#TambahDataSiga">
+                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal"
+                                data-target="#TambahDataSiga">
                                 <i class="nav-icon  fas fa-plus"></i> Data Siga
                             </a>
 
-                            <?php $this->load->view('Admin/modal/TambahDataSiga'); ?>
+                            <?php $this->load->view('admin/modal/TambahDataSiga'); ?>
 
-                            <a href="adminpanel/DataSigaAdmin/ElemenData/<?php echo $GetDataIdUnit->idUnitKerja ?>/<?php echo $GetDataIdKategori->idKategoriData ?>/<?php echo $GetDataIdJudul->idJudulData ?>" class="btn btn-primary btn-sm elevation-1">
+                            <a href="adminpanel/DataSigaAdmin/ElemenData/<?php echo $GetDataIdUnit->idUnitKerja ?>/<?php echo $GetDataIdKategori->idKategoriData ?>/<?php echo $GetDataIdJudul->idJudulData ?>"
+                                class="btn btn-primary btn-sm elevation-1">
                                 Elemen Data
                             </a>
                             <hr>
-                            <table id="example" class="table table-bordered table-hover " style="font-size:14px; width: 100%;">
+                            <table id="example" class="table table-bordered table-hover "
+                                style="font-size:14px; width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -55,24 +59,31 @@
                                 <tbody>
                                     <?php $no = 1;
                                     foreach ($GetDataSigaDetail->result() as $row) { ?>
-                                        <tr>
-                                            <td><?php echo $no; ?></td>
-                                            <td><?php echo $row->nama; ?></td>
+                                    <tr>
+                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $row->nama; ?></td>
 
-                                            <?php setlocale(LC_TIME, 'id_ID'); ?>
-                                            <td><?php echo date('Y', strtotime($row->tgl)); ?></td>
+                                        <?php setlocale(LC_TIME, 'id_ID'); ?>
+                                        <td><?php echo date('Y', strtotime($row->tgl)); ?></td>
 
-                                            <td><?php echo $row->nilaiData; ?></td>
-                                            <td><?php echo $row->satuan; ?></td>
-                                            <td align="center">
-                                                <a href="adminpanel/DataSigaAdmin/HapusDataSiga/<?php echo $row->idDataDasar; ?>/<?php echo $row->idUnitKerja; ?>/<?php echo $row->idKategoriData; ?>/<?php echo $row->idJudulData; ?>" onclick="return confirm('Apakah yakin ingin dihapus?');" class="btn btn-warning btn-sm elevation-1">
-                                                    <i class="nav-icon fas fa-trash"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal" data-target="#editDataSiga" data-idunit='<?php echo $row->idUnitKerja; ?>' data-idkate='<?php echo $row->idKategoriData; ?>' data-idjudul='<?php echo $row->idJudulData; ?>' data-id='<?php echo $row->idDataDasar; ?>'>
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        <td><?php echo $row->nilaiData; ?></td>
+                                        <td><?php echo $row->satuan; ?></td>
+                                        <td align="center">
+                                            <a href="adminpanel/DataSigaAdmin/HapusDataSiga/<?php echo $row->idDataDasar; ?>/<?php echo $row->idUnitKerja; ?>/<?php echo $row->idKategoriData; ?>/<?php echo $row->idJudulData; ?>"
+                                                onclick="return confirm('Apakah yakin ingin dihapus?');"
+                                                class="btn btn-warning btn-sm elevation-1">
+                                                <i class="nav-icon fas fa-trash"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal"
+                                                data-target="#editDataSiga"
+                                                data-idunit='<?php echo $row->idUnitKerja; ?>'
+                                                data-idkate='<?php echo $row->idKategoriData; ?>'
+                                                data-idjudul='<?php echo $row->idJudulData; ?>'
+                                                data-id='<?php echo $row->idDataDasar; ?>'>
+                                                <i class="nav-icon fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                     <?php $no++;
                                     } ?>
                                 </tbody>
@@ -86,7 +97,8 @@
         <?php $this->load->view('admin/tools/footer'); ?>
     </div>
     <!-- Modal data -->
-    <div class="modal fade " id="editDataSiga" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade " id="editDataSiga" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content ">
                 <div class="modal-header">
@@ -112,32 +124,32 @@
     <?php $this->load->view('admin/tools/js_footer'); ?>
 </body>
 <script type="text/javascript">
-    $('#unit').select2({
-        dropdownParent: $('#TambahDataSiga'),
-        placeholder: "Pilih..."
+$('#unit').select2({
+    dropdownParent: $('#TambahDataSiga'),
+    placeholder: "Pilih..."
+});
+$(document).ready(function() {
+    $('#example').DataTable();
+});
+$('#editDataSiga').on('show.bs.modal', function(e) {
+    var id = $(e.relatedTarget).data('id');
+    var idunit = $(e.relatedTarget).data('idunit');
+    var idkate = $(e.relatedTarget).data('idkate');
+    var idjudul = $(e.relatedTarget).data('idjudul');
+    $.ajax({
+        type: 'post',
+        url: "<?php echo base_url(); ?>adminpanel/DataSigaAdmin/GetDataIdSiga",
+        data: {
+            id: id,
+            idunit: idunit,
+            idkate: idkate,
+            idjudul: idjudul
+        },
+        success: function(data) {
+            $('.isiEditDataSiga').html(data);
+        }
     });
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-    $('#editDataSiga').on('show.bs.modal', function(e) {
-        var id = $(e.relatedTarget).data('id');
-        var idunit = $(e.relatedTarget).data('idunit');
-        var idkate = $(e.relatedTarget).data('idkate');
-        var idjudul = $(e.relatedTarget).data('idjudul');
-        $.ajax({
-            type: 'post',
-            url: "<?php echo base_url(); ?>adminpanel/DataSigaAdmin/GetDataIdSiga",
-            data: {
-                id: id,
-                idunit: idunit,
-                idkate: idkate,
-                idjudul: idjudul
-            },
-            success: function(data) {
-                $('.isiEditDataSiga').html(data);
-            }
-        });
-    });
+});
 </script>
 
 </html>

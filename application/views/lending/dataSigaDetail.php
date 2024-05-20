@@ -50,7 +50,8 @@
 
                     </div>
                     <div class="card-body ">
-                        <table id="example" class="table table-bordered table-hover " style="font-size:14px; width: 100%;">
+                        <table id="example" class="table table-bordered table-hover "
+                            style="font-size:14px; width: 100%;">
                             <thead style="text-align:center; vertical-align: middle;">
                                 <tr>
                                     <th width="50px">No</th>
@@ -98,41 +99,53 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> //copy
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script> //csv
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> //excel
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script> //pdf
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script> //print
+
+    <!-- //copy -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- //copy -->
+
+    <!-- //csv -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <!-- //csv -->
+    <!-- //excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <!-- //excel -->
+    <!-- //pdf -->
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <!-- //pdf -->
+    <!-- //print -->
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <!-- //print -->
     <!-- <script src="tmpDepan/bootstrap5/js/dataTables.bootstrap5.min.js"></script> -->
     <!-- data tabel -->
     <script>
-        new DataTable('#example', {
-            layout: {
-                topStart: {
-                    buttons: [{
-                            extend: 'copy',
-                            className: 'btn btn-success glyphicon glyphicon-duplicate'
-                        },
-                        {
-                            extend: 'csv',
-                            className: 'btn btn-success glyphicon glyphicon-save-file'
-                        },
-                        {
-                            extend: 'excel',
-                            className: 'btn btn-success glyphicon glyphicon-list-alt'
-                        },
-                        {
-                            extend: 'pdf',
-                            className: 'btn btn-success glyphicon glyphicon-file'
-                        },
-                        {
-                            extend: 'print',
-                            className: 'btn btn-success glyphicon glyphicon-print'
-                        }
-                    ]
-                }
+    new DataTable('#example', {
+        layout: {
+            topStart: {
+                buttons: [{
+                        extend: 'copy',
+                        className: 'btn btn-success glyphicon glyphicon-duplicate'
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'btn btn-success glyphicon glyphicon-save-file'
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-success glyphicon glyphicon-list-alt'
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn btn-success glyphicon glyphicon-file'
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-success glyphicon glyphicon-print'
+                    }
+                ]
             }
-        });
+        }
+    });
     </script>
 
 </body>

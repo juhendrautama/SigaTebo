@@ -34,10 +34,7 @@
                                 data-target="#TambahElemenData">
                                 <i class="nav-icon  fas fa-plus"></i> Elemen Data
                             </a>
-
-                            <?php $this->load->view('Admin/modal/TambahElemenData');
-                            ?>
-
+                            <?php $this->load->view('admin/modal/TambahElemenData'); ?>
                             <hr>
                             <table id="example" class="table table-bordered table-hover "
                                 style="font-size:14px; width: 100%;">

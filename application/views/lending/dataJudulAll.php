@@ -52,10 +52,11 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($GetDataJudulAll->result() as $row) { ?>
-                                    <tr>
-                                        <td><?php echo $row->judul ?></td>
-                                        <td><a href="Data/Detail/<?php echo $row->idKategoriData ?>/<?php echo $row->idJudulData ?>/<?php echo str_replace(' ', '-', $row->judul); ?>#Data" class="btn btn-success btn-sm">Selengkap Nya</a></td>
-                                    </tr>
+                                <tr>
+                                    <td><?php echo $row->judul ?></td>
+                                    <td><a href="Data/Detail/<?php echo $row->idKategoriData ?>/<?php echo $row->idJudulData ?>/<?php echo str_replace(' ', '-', $row->judul); ?>#Data"
+                                            class="btn btn-success btn-sm">Selengkap Nya</a></td>
+                                </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -80,16 +81,27 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script> //copy
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script> //csv
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> //excel
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script> //pdf
-    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script> //print
+    <!-- //copy -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- //copy -->
+
+    <!-- //csv -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <!-- //csv -->
+    <!-- //excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <!-- //excel -->
+    <!-- //pdf -->
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
+    <!-- //pdf -->
+    <!-- //print -->
+    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
+    <!-- //print -->
     <!-- <script src="tmpDepan/bootstrap5/js/dataTables.bootstrap5.min.js"></script> -->
     <!-- data tabel -->
 
     <script>
-        new DataTable('#example', {});
+    new DataTable('#example', {});
     </script>
 </body>
 

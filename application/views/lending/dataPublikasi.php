@@ -43,17 +43,28 @@
                         </font>
                     </center>
                 </div>
-                <div class="card  p-5 border-info">
-                    <div class="row row-cols-2 row-cols-md-3 " data-aos="fade-left">
+                <div class="card  p-4 border-info">
+                    <div class="row row-cols-1 row-cols-md-3 " data-aos="fade-left">
                         <?php foreach ($GetDataPublikasi->result() as $row) { ?>
-                        <div class="col p-3">
+                        <div class="col p-2">
                             <a href="">
-                                <div class="card h rounded-5 p-2" style="width:100%; height:100%;">
+                                <div class="card h rounded-5 p-1" style="width:100%; height:100%;">
                                     <div class="card-body">
-                                        <img src="img/LOGO/pdf.svg" alt="">
-                                        <font style="font-size:14px; font-weight: bold; color:#0663C4;">
-                                            <?php echo $row->judul ?>
-                                        </font>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img src="img/LOGO/pdf.svg" alt="" style="width:50px;">
+                                            </div>
+                                            <div class="col-9">
+                                                <font style="font-size:14px; font-weight: bold; color:#0663C4;">
+                                                    <?php echo $row->judul ?>
+                                                </font>
+                                                <br>
+                                                <font style="font-size:11px; font-weight: bold; ">
+                                                    <?php setlocale(LC_TIME, 'id_ID'); ?>
+                                                    <?php echo date('d F Y', strtotime($row->tgl)); ?>
+                                                </font>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
