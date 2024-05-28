@@ -16,6 +16,10 @@
     //     $this->load->view('lending/tools/modalInfo');
     // } else if ($Gerdataid->nilaiTampil == '2') {
     // }
+
+    $tahun_end = date('Y');
+    $tahun_start = $tahun_end - 2;
+
     ?>
 
     <!-- ======= Header ======= -->
@@ -40,23 +44,40 @@
                     <font style="font-size:13px;"><?php echo date('d F Y', strtotime($GetDataIdJudul->tgl)); ?></font>
                 </div>
                 <div class="card shadow-sm">
-                    <div class="card-header bg-white ">
-                        <?php
-                        $idUnit = $GetDataIdJudul->idUnitKerja;
-                        $dataUnit = $this->M_crud_unit->GetDataIdUnit($idUnit)->row()
-                        ?>
-                        Deskripsi Data <br>
-                        Sumber : <?php echo $dataUnit->namaUnit; ?>
+                    <div class="card-header bg-white d-flex justify-content-between">
+                        <div>
+                            <?php
+                            $idUnit = $GetDataIdJudul->idUnitKerja;
+                            $dataUnit = $this->M_crud_unit->GetDataIdUnit($idUnit)->row()
+                            ?>
+                            Deskripsi Data <br>
+                            Sumber : <?php echo $dataUnit->namaUnit; ?>
+                        </div>
+                        <div>
+                            <div class="btn-group">
+                                <button id="prev-tahun" class="btn btn-primary"><span
+                                        aria-hidden="true">&laquo;</span></button>
 
+                                <button type="button" class="btn btn-success mx-2 rounded" id="txt-tahun"
+                                    data-kategori='<?= $idkategori ?>' data-judul='<?= $idjudul ?>'
+                                    data-tahun-end='<?= $tahun_end ?>'
+                                    data-tahun-start='<?= $tahun_start ?>'><?= $tahun_start . " - " . $tahun_end ?></button>
+
+                                <button id="next-tahun" class="btn btn-primary"><span
+                                        aria-hidden="true">&raquo;</span></button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body ">
+                    <div class="card-body hasilajax">
                         <table id="example" class="table table-bordered table-hover "
                             style="font-size:14px; width: 100%;">
                             <thead style="text-align:center; vertical-align: middle;">
                                 <tr>
                                     <th width="50px">No</th>
                                     <th>Elemen Data</th>
-                                    <th class="text-center">Tahun (<?php echo date('Y'); ?>)</th>
+                                    <th class="text-center">Tahun (<?= $tahun_start; ?>)</th>
+                                    <th class="text-center">Tahun (<?= $tahun_start + 1; ?>)</th>
+                                    <th class="text-center">Tahun (<?= $tahun_end; ?>)</th>
                                     <th>Satuan</th>
                                 </tr>
                             </thead>
@@ -67,8 +88,10 @@
                                     echo "<tr>";
                                     echo "<td>" . $no . "</td>";
                                     echo "<td>" . $row->nama . "</td>";
-                                    echo "<td class='text-center'>" . $row->sum_nilaiData . "</td>";
-                                    echo "<td>" . $row->satuan . "</td>";
+                                    echo "<td class='text-center'>" . $row->thn_1 . "</td>";
+                                    echo "<td class='text-center'>" . $row->thn_2 . "</td>";
+                                    echo "<td class='text-center'>" . $row->thn_3 . "</td>";
+                                    echo "<td> Angka </td>";
                                     echo "</tr>";
                                     $no++;
                                 }
@@ -90,7 +113,7 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>
-    <div id="preloader"></div>
+    <!-- <div id="preloader"></div> -->
 
     <!-- Vendor JS Files -->
     <?php $this->load->view('lending/tools/js'); ?>
@@ -119,6 +142,64 @@
     <!-- <script src="tmpDepan/bootstrap5/js/dataTables.bootstrap5.min.js"></script> -->
     <!-- data tabel -->
     <script>
+    $('#prev-tahun').on('click', function() {
+        var tahunstart = $('#txt-tahun').data('tahun-start');
+        var tahunend = $('#txt-tahun').data('tahun-end');
+        var idkategori = $('#txt-tahun').data('kategori');
+        var idjudul = $('#txt-tahun').data('judul');
+
+        var prev = tahunstart - 1;
+        var next = tahunend - 1;
+
+        $('#txt-tahun').data('tahun-start', prev);
+        $('#txt-tahun').data('tahun-end', next);
+
+        $('#txt-tahun').html(prev + " - " + next);
+
+        $.ajax({
+            url: "<?= base_url('data/ajaxdetail') ?>",
+            type: "POST",
+            data: {
+                tahunstart: prev,
+                tahunend: next,
+                idkategori: idkategori,
+                idjudul: idjudul
+            },
+            success: function(datahtml) {
+                $('.hasilajax').html(datahtml);
+            }
+        })
+    });
+
+    $('#next-tahun').on('click', function() {
+        var tahunstart = $('#txt-tahun').data('tahun-start');
+        var tahunend = $('#txt-tahun').data('tahun-end');
+        var idkategori = $('#txt-tahun').data('kategori');
+        var idjudul = $('#txt-tahun').data('judul');
+
+        var prev = tahunstart + 1;
+        var next = tahunend + 1;
+
+        $('#txt-tahun').data('tahun-start', prev);
+        $('#txt-tahun').data('tahun-end', next);
+
+        $('#txt-tahun').html(prev + " - " + next);
+
+        $.ajax({
+            url: "<?= base_url('data/ajaxdetail') ?>",
+            type: "POST",
+            data: {
+                tahunstart: prev,
+                tahunend: next,
+                idkategori: idkategori,
+                idjudul: idjudul
+            },
+            success: function(datahtml) {
+                $('.hasilajax').html(datahtml);
+            }
+        })
+    });
+
     new DataTable('#example', {
         layout: {
             topStart: {

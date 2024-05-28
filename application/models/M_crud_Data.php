@@ -227,7 +227,6 @@ class M_crud_Data extends CI_Model
             tbl_dataDasarMaster.satuan;
         ");
 
-
         // return $this->db->query("SELECT a.*, e.nama FROM `tbl_datadasarmaster` a
         // JOIN tbl_unitkerja b on b.idUnitKerja = a.idUnitKerja
         // JOIN tbl_kategoridata c on c.idKategoriData = a.idKategoriData
@@ -237,5 +236,17 @@ class M_crud_Data extends CI_Model
         // AND a.idJudulData = $idjuduldata
         // AND year(a.tgl) = year(curdate())
         // ");
+    }
+
+    public function getDataRezky($id_kategori, $id_juduldata, $tahunawal, $tahunakhir)
+    {
+        $tahuntengah = $tahunawal + 1;
+        return $this->db->query("
+        SELECT *, 
+            (select sum(nilaiData) from tbl_dataDasarMaster b WHERE b.idElemenData = a.idElemenData AND YEAR(b.tgl) = '$tahunawal') as thn_1,
+            (select sum(nilaiData) from tbl_dataDasarMaster b WHERE b.idElemenData = a.idElemenData AND YEAR(b.tgl) = '$tahuntengah') as thn_2,
+            (select sum(nilaiData) from tbl_dataDasarMaster b WHERE b.idElemenData = a.idElemenData AND YEAR(b.tgl) = '$tahunakhir') as thn_3
+        FROM tbl_elemenData a WHERE idKategoriData = '$id_kategori' and idJudulData = '$id_juduldata';
+        ");
     }
 }
