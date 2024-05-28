@@ -47,7 +47,7 @@
                     <div class="row row-cols-1 row-cols-md-3 " data-aos="fade-left">
                         <?php foreach ($GetDataPublikasi->result() as $row) { ?>
                         <div class="col p-2">
-                            <a href="">
+                            <a href="DataPublikasi/TampilData/<?php echo $row->file ?>" target="_blank">
                                 <div class="card h rounded-5 p-1" style="width:100%; height:100%;">
                                     <div class="card-body">
                                         <div class="row">

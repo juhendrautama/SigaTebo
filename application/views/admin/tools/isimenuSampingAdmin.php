@@ -62,8 +62,8 @@
 </li>
 <li class="nav-header">Lainnya</li>
 <li class="nav-item">
-    <a href="adminpanel/LayananKami" style="color:#fff;" class="nav-link 
-                        <?php if ($this->uri->segment('2') == 'LayananKami') {
+    <a href="adminpanel/DataPublikasi" style="color:#fff;" class="nav-link 
+                        <?php if ($this->uri->segment('2') == 'DataPublikasi') {
                             echo "active";
                         } else {
                         } ?>">
