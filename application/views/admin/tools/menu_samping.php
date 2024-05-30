@@ -1,35 +1,34 @@
 <style>
-.main-sidebar {
-    background: linear-gradient(90deg, #288ab1, #1ab355);
-    ;
-}
+    .main-sidebar {
+        background: linear-gradient(90deg, #288ab1, #1ab355);
+        ;
+    }
 
-.container {
-    display: flex;
-    align-items: center;
-}
+    .container {
+        display: flex;
+        align-items: center;
+    }
 
-.logo {
-    width: 55px;
-    height: auto;
-    margin-right: 10px;
-}
+    .logo {
+        width: 55px;
+        height: auto;
+        margin-right: 10px;
+    }
 
-.text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    .text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
 
-}
+    }
 
-.text font:first-child {
-    margin-bottom: -4px;
-    font-weight: bold;
-    /* Sesuaikan jarak sesuai keinginan Anda */
-}
+    .text font:first-child {
+        margin-bottom: -4px;
+        font-weight: bold;
+        /* Sesuaikan jarak sesuai keinginan Anda */
+    }
 </style>
-<aside class="main-sidebar shadow sidebar-dark-dark text-light elevation-0 "
-    style="position:fixed; top:0; left:0; height:100%;  overflow-y:auto; ">
+<aside class="main-sidebar shadow sidebar-dark-dark text-light elevation-0 " style="position:fixed; top:0; left:0; height:100%;  overflow-y:auto; ">
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
@@ -40,7 +39,6 @@
                     <font style="font-size:10px;">Sistem Informasi Gender dan Anak</font>
                     <font style="font-size:8px;">Kabupaten Tebo
                         <br>
-                        Opd :
                         <?php
                         $idUnit = $this->session->userdata('idUnitKerja');
                         $dataUnitKerja = $this->M_crud_unit->GetDataIdUnit($idUnit)->row();
@@ -71,9 +69,9 @@
                 $level = $this->session->userdata('level');
                 if ($level == '1') {
                 ?>
-                <?php $this->load->view('admin/tools/isimenuSampingAdmin'); ?>
+                    <?php $this->load->view('admin/tools/isimenuSampingAdmin'); ?>
                 <?php } else if ($level == '2') { ?>
-                <?php $this->load->view('User/tools/isimenuSampingUser'); ?>
+                    <?php $this->load->view('User/tools/isimenuSampingUser'); ?>
                 <?php } ?>
             </ul>
         </nav>

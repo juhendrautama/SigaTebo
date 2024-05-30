@@ -9,6 +9,7 @@ class DataSigaAdmin extends CI_Controller
         $this->load->model('M_crud_JudulSiga');
         $this->load->model('M_crud_Data');
         $this->load->model('M_crud_unit');
+        $this->load->model('M_crud_wilayah');
         $this->load->library("session");
         $this->sessionku();
     }
@@ -21,7 +22,6 @@ class DataSigaAdmin extends CI_Controller
             redirect('Login_akses');
         }
     }
-
     public function Index()
     {
         $data['GetDataunit'] = $this->M_crud_unit->GetDataunit();
@@ -41,8 +41,23 @@ class DataSigaAdmin extends CI_Controller
         $data['GetDataIdUnit'] = $this->M_crud_unit->GetDataIdUnit($idUnitKerja)->row();
         $data['GetDataIdKategori'] = $this->M_crud_kategoriData->GetDataIdKategori($idKategoriData)->row();
         $data['GetDataIdJudul'] = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
-        $data['GetElemenData'] = $this->M_crud_Data->GetElemenData($idUnitKerja, $idKategoriData, $idJudulData);
-        $data['GetDataSigaDetail'] = $this->M_crud_Data->GetDataSigaDetailAdm($idUnitKerja, $idKategoriData, $idJudulData);
+
+        $data['GetDataKec'] = $this->M_crud_wilayah->GetDataKec();
+        $datajudul = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
+        for ($i = 2; $i <= 53; $i++) {
+            if ($datajudul->formatTabel == (string)$i) {
+                $methodName = 'TampilSaga' . $i;
+                if (method_exists($this->M_crud_Data, $methodName)) {
+                    $data['tampilsiga'] = $this->M_crud_Data->$methodName($idUnitKerja, $idKategoriData, $idJudulData);
+                } else {
+                    // Handle the case where the method does not exist
+                    $data['tampilsiga'] = null;
+                    // You can also log an error or throw an exception here
+                }
+                break; // Keluar dari loop setelah menemukan kecocokan
+            }
+        }
+
         $this->load->view('admin/dataSigaDetail', $data);
     }
 
@@ -53,7 +68,22 @@ class DataSigaAdmin extends CI_Controller
             $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
             $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
             $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-            $hasil = $this->M_crud_Data->SimpanDataSiga();
+
+            $datajudul = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
+            $hasil = false; // Inisialisasi variabel $hasil
+            for ($i = 2; $i <= 53; $i++) {
+                if ($datajudul->formatTabel == (string)$i) {
+                    $methodName = 'SimpanDataSiga' . $i;
+                    if (method_exists($this->M_crud_Data, $methodName)) {
+                        $hasil = $this->M_crud_Data->$methodName();
+                    } else {
+                        // Handle the case where the method does not exist
+                        $hasil = null;
+                        // You can also log an error or throw an exception here
+                    }
+                    break; // Keluar dari loop setelah menemukan kecocokan
+                }
+            }
             if ($hasil) { ?>
                 <script type="text/javascript">
                     window.location =
@@ -61,6 +91,32 @@ class DataSigaAdmin extends CI_Controller
                 </script>
             <?php
             }
+        }
+    }
+
+    public function HapusDataSiga($idSiga, $idUnitKerja, $idKategoriData, $idJudulData)
+    {
+        $datajudul = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
+        $hasil = false; // Inisialisasi variabel $hasil
+        for ($i = 2; $i <= 53; $i++) {
+            if ($datajudul->formatTabel == (string)$i) {
+                $methodName = 'HapusDataSiga' . $i;
+                if (method_exists($this->M_crud_Data, $methodName)) {
+                    $hasil = $this->M_crud_Data->$methodName($idSiga, $idUnitKerja, $idKategoriData, $idJudulData);
+                } else {
+                    // Handle the case where the method does not exist
+                    $hasil = null;
+                    // You can also log an error or throw an exception here
+                }
+                break; // Keluar dari loop setelah menemukan kecocokan
+            }
+        }
+        if ($hasil) { ?>
+            <script type="text/javascript">
+                window.location =
+                    "<?php echo base_url() ?>adminpanel/DataSigaAdmin/Data/<?= $idUnitKerja; ?>/<?= $idKategoriData; ?>/<?= $idJudulData; ?>";
+            </script>
+            <?php
         }
     }
 
@@ -86,92 +142,6 @@ class DataSigaAdmin extends CI_Controller
                 <script type="text/javascript">
                     window.location =
                         "<?php echo base_url() ?>adminpanel/DataSigaAdmin/Data/<?= $idUnitKerja; ?>/<?= $idKategoriData; ?>/<?= $idJudulData; ?>";
-                </script>
-            <?php
-            }
-        }
-    }
-
-    public function HapusDataSiga($idDataDasar, $idUnitKerja, $idKategoriData, $idJudulData)
-    {
-        $hasil = $this->M_crud_Data->HapusDataSiga($idDataDasar);
-        if ($hasil) { ?>
-            <script type="text/javascript">
-                window.location =
-                    "<?php echo base_url() ?>adminpanel/DataSigaAdmin/Data/<?= $idUnitKerja; ?>/<?= $idKategoriData; ?>/<?= $idJudulData; ?>";
-            </script>
-            <?php
-        }
-    }
-
-
-    ///elemen data 
-
-    public function ElemenData($idUnitKerja, $idKategoriData, $idJudulData)
-    {
-        $data['GetDataIdUnit'] = $this->M_crud_unit->GetDataIdUnit($idUnitKerja)->row();
-        $data['GetDataIdKategori'] = $this->M_crud_kategoriData->GetDataIdKategori($idKategoriData)->row();
-        $data['GetDataIdJudul'] = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
-        $data['GetElemenData'] = $this->M_crud_Data->GetElemenData($idUnitKerja, $idKategoriData, $idJudulData);
-        $this->load->view('admin/dataElemenData', $data);
-    }
-
-    public function SimpanElemenData()
-    {
-        if (isset($_POST['proses'])) {
-            $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
-            $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
-            $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-            $hasil = $this->M_crud_Data->SimpanElemenData();
-            if ($hasil) { ?>
-                <script type="text/javascript">
-                    window.location =
-                        "<?php echo base_url() ?>adminpanel/DataSigaAdmin/ElemenData/<?= $idUnitKerja; ?>/<?= $idKategoriData; ?>/<?= $idJudulData; ?>";
-                </script>
-            <?php
-            }
-        }
-    }
-
-
-    public function GetpesanHapus()
-    {
-        $id = $this->input->post('id');
-        $data['GetElemenDataId'] = $this->M_crud_Data->GetElemenDataId($id)->row();
-        $this->load->view('User/modal/DataPesanHapus', $data);
-    }
-
-
-    public function HapusElemenData($id, $idUnitKerja, $idKategoriData, $idJudulData)
-    {
-        $hasil = $this->M_crud_Data->HapusElemenData($id);
-        if ($hasil) { ?>
-            <script type="text/javascript">
-                window.location =
-                    "<?php echo base_url() ?>adminpanel/DataSigaAdmin/ElemenData/<?= $idUnitKerja; ?>/<?= $idKategoriData; ?>/<?= $idJudulData; ?>";
-            </script>
-            <?php
-        }
-    }
-
-    public function GetElemenDataId()
-    {
-        $id = $this->input->post('id');
-        $data['GetElemenDataId'] = $this->M_crud_Data->GetElemenDataId($id)->row();
-        $this->load->view('admin/modal/isiEditElemenData', $data);
-    }
-
-    public function SimpanUbahElemenData()
-    {
-        if (isset($_POST['proses'])) {
-            $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
-            $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
-            $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-            $hasil = $this->M_crud_Data->SimpanUbahElemenData();
-            if ($hasil) { ?>
-                <script type="text/javascript">
-                    window.location =
-                        "<?php echo base_url() ?>adminpanel/DataSigaAdmin/ElemenData/<?= $idUnitKerja; ?>/<?= $idKategoriData; ?>/<?= $idJudulData; ?>";
                 </script>
 <?php
             }

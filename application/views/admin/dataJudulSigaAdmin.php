@@ -29,14 +29,16 @@
                             </center>
                         </div>
                         <div class="card-body ">
-                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal" data-target="#TambahJudulSiga">
+                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal"
+                                data-target="#TambahJudulSiga">
                                 <i class="nav-icon  fas fa-plus"></i> Tambah Data
                             </a>
 
-                            <?php $this->load->view('Admin/modal/TambahJudulSiga'); ?>
+                            <?php $this->load->view('admin/modal/TambahJudulSiga'); ?>
 
                             <hr>
-                            <table id="example" class="table table-bordered table-hover " style="font-size:14px; width: 100%;">
+                            <table id="example" class="table table-bordered table-hover "
+                                style="font-size:14px; width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -50,24 +52,26 @@
                                 <tbody>
                                     <?php $no = 1;
                                     foreach ($GetJudulSigaAll->result() as $row) { ?>
-                                        <tr>
-                                            <td><?php echo $no; ?></td>
-                                            <td><?php echo $row->judul; ?></td>
-                                            <td><?php echo $row->namaUnit; ?></td>
-                                            <td><?php echo $row->namaKategori; ?></td>
-                                            <?php setlocale(LC_TIME, 'id_ID'); ?>
-                                            <td><?php echo date('d F Y', strtotime($row->tgl)); ?></td>
-                                            <td align="center">
-                                                <!-- <a href="adminpanel/JudulDataSiga/HapusDataKategori/<?php echo $row->idJudulData; ?>"
+                                    <tr>
+                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $row->judul; ?></td>
+                                        <td><?php echo $row->namaUnit; ?></td>
+                                        <td><?php echo $row->namaKategori; ?></td>
+                                        <?php setlocale(LC_TIME, 'id_ID'); ?>
+                                        <td><?php echo date('d F Y', strtotime($row->tgl)); ?></td>
+                                        <td align="center">
+                                            <!-- <a href="adminpanel/JudulDataSiga/HapusDataKategori/<?php echo $row->idJudulData; ?>"
                                                 onclick="return confirm('Apakah yakin ingin dihapus?');"
                                                 class="btn btn-warning btn-sm elevation-1">
                                                 <i class="nav-icon fas fa-trash"></i>
                                             </a> -->
-                                                <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal" data-target="#editDataJudulSiga" data-id='<?php echo $row->idJudulData; ?>'>
-                                                    <i class="nav-icon fas fa-edit"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal"
+                                                data-target="#editDataJudulSiga"
+                                                data-id='<?php echo $row->idJudulData; ?>'>
+                                                <i class="nav-icon fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                     <?php $no++;
                                     } ?>
                                 </tbody>
@@ -81,7 +85,8 @@
         <?php $this->load->view('admin/tools/footer'); ?>
     </div>
     <!-- Modal data -->
-    <div class="modal fade " id="editDataJudulSiga" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade " id="editDataJudulSiga" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content ">
                 <div class="modal-header">
@@ -107,31 +112,36 @@
     <?php $this->load->view('admin/tools/js_footer'); ?>
 </body>
 <script type="text/javascript">
-    $('#idUnitKerja').select2({
-        dropdownParent: $('#TambahJudulSiga'),
-        placeholder: "Pilih unit..."
-    });
-    $('#kategori').select2({
-        dropdownParent: $('#TambahJudulSiga'),
-        placeholder: "Pilih Kategori..."
-    });
+$('#idUnitKerja').select2({
+    dropdownParent: $('#TambahJudulSiga'),
+    placeholder: "Pilih unit..."
+});
+$('#kategori').select2({
+    dropdownParent: $('#TambahJudulSiga'),
+    placeholder: "Pilih Kategori..."
+});
 
-    $(document).ready(function() {
-        $('#example').DataTable();
+$('#idformatTabel').select2({
+    dropdownParent: $('#TambahJudulSiga'),
+    placeholder: "Pilih Format Tabel..."
+});
+
+$(document).ready(function() {
+    $('#example').DataTable();
+});
+$('#editDataJudulSiga').on('show.bs.modal', function(e) {
+    var id = $(e.relatedTarget).data('id');
+    $.ajax({
+        type: 'post',
+        url: "<?php echo base_url(); ?>adminpanel/JudulDataSiga/GetDataIdJudul",
+        data: {
+            id: id
+        },
+        success: function(data) {
+            $('.isiEditDataSiga').html(data);
+        }
     });
-    $('#editDataJudulSiga').on('show.bs.modal', function(e) {
-        var id = $(e.relatedTarget).data('id');
-        $.ajax({
-            type: 'post',
-            url: "<?php echo base_url(); ?>adminpanel/JudulDataSiga/GetDataIdJudul",
-            data: {
-                id: id
-            },
-            success: function(data) {
-                $('.isiEditDataSiga').html(data);
-            }
-        });
-    });
+});
 </script>
 
 </html>

@@ -8,236 +8,115 @@ class M_crud_Data extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    function GetDataSigaDetailAdm($idUnitKerja, $idKategoriData, $idJudulData)
-    {
-        $hsl = $this->db->query("
-        SELECT 
-            tbl_dataDasarMaster.`idDataDasar`, 
-            tbl_dataDasarMaster.`idUnitKerja`, 
-            tbl_dataDasarMaster.`idKategoriData`, 
-            tbl_dataDasarMaster.`idJudulData`, 
-            tbl_dataDasarMaster.`idElemenData`, 
-            tbl_elemenData.`nama`,  
-            tbl_dataDasarMaster.`nilaiData`, 
-            tbl_dataDasarMaster.`satuan`, 
-            tbl_dataDasarMaster.`tgl`, 
-            tbl_dataDasarMaster.`tgl_Input`
-        FROM 
-            `tbl_dataDasarMaster`
-        JOIN 
-            `tbl_elemenData` ON tbl_dataDasarMaster.`idElemenData` = tbl_elemenData.`idElemenData`
-        WHERE 
-            tbl_dataDasarMaster.`idUnitKerja` = '$idUnitKerja' 
-            AND tbl_dataDasarMaster.`idKategoriData` = '$idKategoriData' 
-            AND tbl_dataDasarMaster.`idJudulData` = '$idJudulData'
-
-        ");
-        return $hsl;
-    }
-
-
-    function GetDataSigaDetail($idKategoriData, $idJudulData)
-    {
-        $idUnitKerja = $this->session->userdata('idUnitKerja');
-        $hsl = $this->db->query("
-        SELECT 
-            tbl_dataDasarMaster.`idDataDasar`, 
-            tbl_dataDasarMaster.`idUnitKerja`, 
-            tbl_dataDasarMaster.`idKategoriData`, 
-            tbl_dataDasarMaster.`idJudulData`, 
-            tbl_dataDasarMaster.`idElemenData`, 
-            tbl_elemenData.`nama`,  
-            tbl_dataDasarMaster.`nilaiData`, 
-            tbl_dataDasarMaster.`satuan`, 
-            tbl_dataDasarMaster.`tgl`, 
-            tbl_dataDasarMaster.`tgl_Input`
-        FROM 
-            `tbl_dataDasarMaster`
-        JOIN 
-            `tbl_elemenData` ON tbl_dataDasarMaster.`idElemenData` = tbl_elemenData.`idElemenData`
-        WHERE 
-            tbl_dataDasarMaster.`idUnitKerja` = '$idUnitKerja' 
-            AND tbl_dataDasarMaster.`idKategoriData` = '$idKategoriData' 
-            AND tbl_dataDasarMaster.`idJudulData` = '$idJudulData'
-
-        ");
-        return $hsl;
-    }
-
-    function SimpanDataSiga()
-    {
-        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
-        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
-        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-
-        $idElemenData = $this->db->escape_str($this->input->post('idElemenData'));
-        $nilaiData = $this->db->escape_str($this->input->post('nilaiData'));
-        $satuan = $this->db->escape_str($this->input->post('satuan'));
-        $tgl = $this->db->escape_str($this->input->post('tgl'));
-        $tgl_Input = Date("Y-m-d");
-        $sql = $this->db->query("INSERT INTO 
-        `tbl_dataDasarMaster`
-        (`idDataDasar`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idElemenData`, `nilaiData`, `satuan`, `tgl`, `tgl_Input`) 
-        VALUES 
-        (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$idElemenData','$nilaiData','$satuan','$tgl','$tgl_Input')");
-        return $sql;
-    }
-
-
-    function HapusDataSiga($idDataDasar)
-    {
-        $sql = $this->db->query(" DELETE FROM `tbl_dataDasarMaster` WHERE idDataDasar='$idDataDasar'");
-        return $sql;
-    }
-
-    function GetDataIdSiga($id)
-    {
-        $hsl = $this->db->query("SELECT `idDataDasar`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idElemenData`, `nilaiData`, `satuan`, `tgl`, `tgl_Input` FROM `tbl_dataDasarMaster` WHERE idDataDasar='$id'");
-        return $hsl;
-    }
-
-    function SimpanUbahSiga()
-    {
-        $id = $this->db->escape_str($this->input->post('id'));
-        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
-        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
-        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-
-        $idElemenData = $this->db->escape_str($this->input->post('idElemenData'));
-        $nilaiData = $this->db->escape_str($this->input->post('nilaiData'));
-        $satuan = $this->db->escape_str($this->input->post('satuan'));
-        $tgl = $this->db->escape_str($this->input->post('tgl'));
-        $tgl_Input = Date("Y-m-d");
-        $sql = $this->db->query("
-        UPDATE `tbl_dataDasarMaster` 
-        SET 
-        `idUnitKerja`='$idUnitKerja',
-        `idKategoriData`='$idKategoriData',
-        `idJudulData`='$idJudulData',
-        `idElemenData`='$idElemenData',
-        `nilaiData`='$nilaiData',
-        `satuan`='$satuan',
-        `tgl`='$tgl',
-        `tgl_Input`='$tgl_Input'
-        where
-        idDataDasar = '$id'  
-        ");
-        return $sql;
-    }
-
-    //elemen data
-
-
-
-    function GetElemenData($idUnitKerja, $idKategoriData, $idJudulData)
-    {
-        $hsl = $this->db->query("
-        SELECT tbl_elemenData.idElemenData, tbl_elemenData.idUnitKerja, tbl_elemenData.idKategoriData, tbl_elemenData.idJudulData, tbl_elemenData.nama, tbl_elemenData.tgl, COUNT(tbl_dataDasarMaster.idElemenData) AS totalcount
-        FROM tbl_elemenData
-        LEFT JOIN tbl_dataDasarMaster ON tbl_elemenData.idElemenData = tbl_dataDasarMaster.idElemenData
-        WHERE tbl_elemenData.idUnitKerja = '$idUnitKerja' 
-        AND tbl_elemenData.idKategoriData = '$idKategoriData' 
-        AND tbl_elemenData.idJudulData = '$idJudulData'
-        GROUP BY tbl_elemenData.idElemenData, tbl_elemenData.idUnitKerja, tbl_elemenData.idKategoriData, tbl_elemenData.idJudulData, tbl_elemenData.nama, tbl_elemenData.tgl;
-        ");
-        return $hsl;
-    }
-
-    function SimpanElemenData()
-    {
-        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
-        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
-        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-
-        $nama = $this->db->escape_str($this->input->post('nama'));
-        $tgl = Date("Y-m-d");
-        $sql = $this->db->query("INSERT INTO 
-        `tbl_elemenData`
-        (`idElemenData`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `nama`, `tgl`) 
-        VALUES 
-        (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$nama','$tgl')");
-        return $sql;
-    }
-
-    function HapusElemenData($id)
-    {
-        $sql = $this->db->query(" DELETE FROM `tbl_elemenData` WHERE idElemenData='$id'");
-        return $sql;
-    }
-
-    function GetElemenDataId($id)
-    {
-        $hsl = $this->db->query("SELECT `idElemenData`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `nama`, `tgl` FROM `tbl_elemenData` WHERE idElemenData='$id'");
-        return $hsl;
-    }
-
-    function SimpanUbahElemenData()
-    {
-        $id = $this->db->escape_str($this->input->post('id'));
-        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
-        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
-        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
-
-        $nama = $this->db->escape_str($this->input->post('nama'));
-        $tgl = Date("Y-m-d");
-        $sql = $this->db->query("
-        UPDATE `tbl_elemenData` 
-        SET 
-        `idUnitKerja`='$idUnitKerja',
-        `idKategoriData`='$idKategoriData',
-        `idJudulData`='$idJudulData',
-        `nama`='$nama',
-        `tgl`='$tgl'
-        where
-        idElemenData = '$id'  
-        ");
-        return $sql;
-    }
-
-    public function getDataMaster($idkategori, $idjuduldata)
+    //QUERI TAMPIL DATA
+    public function TampilSaga2($idUnitKerja, $idKategoriData, $idJudulData)
     {
         return $this->db->query("
-        SELECT 
-        tbl_dataDasarMaster.satuan,
-        tbl_elemenData.idElemenData, 
-        tbl_elemenData.idUnitKerja, 
-        tbl_elemenData.idKategoriData, 
-        tbl_elemenData.idJudulData, 
-        tbl_elemenData.nama, 
-        tbl_elemenData.tgl, 
-        SUM(tbl_dataDasarMaster.nilaiData) AS sum_nilaiData
-        FROM 
-            tbl_elemenData
-        LEFT JOIN 
-            tbl_dataDasarMaster 
-            ON tbl_elemenData.idElemenData = tbl_dataDasarMaster.idElemenData 
-            AND YEAR(tbl_dataDasarMaster.tgl) = YEAR(CURRENT_DATE)
-            AND tbl_elemenData.idKategoriData = tbl_dataDasarMaster.idKategoriData
-            AND tbl_elemenData.idJudulData = tbl_dataDasarMaster.idJudulData
-        WHERE 
-            tbl_elemenData.idKategoriData = '$idkategori' 
-            AND tbl_elemenData.idJudulData = '$idjuduldata'
-        GROUP BY 
-            tbl_elemenData.idElemenData, 
-            tbl_elemenData.idUnitKerja, 
-            tbl_elemenData.idKategoriData, 
-            tbl_elemenData.idJudulData, 
-            tbl_elemenData.nama, 
-            tbl_elemenData.tgl,
-            tbl_dataDasarMaster.satuan;
+        SELECT `idSiga2`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idKec`, `jenisKelamin`, `nilai`, `tahun`, `tgl`,
+        (select namaKec from tbl_kecTebo  WHERE tbl_kecTebo.idKec = tbl_siga2.idKec ) as namaKec
+        FROM `tbl_siga2` where idUnitKerja='$idUnitKerja' and idKategoriData='$idKategoriData' and idUnitKerja='$idUnitKerja'
         ");
+    }
+    //QUERI TAMPIL DATA
 
-        // return $this->db->query("SELECT a.*, e.nama FROM `tbl_datadasarmaster` a
-        // JOIN tbl_unitkerja b on b.idUnitKerja = a.idUnitKerja
-        // JOIN tbl_kategoridata c on c.idKategoriData = a.idKategoriData
-        // JOIN tbl_juduldata d on d.idJudulData = a.idJudulData
-        // JOIN tbl_elemendata e on e.idElemenData = a.idElemenData
-        // WHERE a.idKategoriData = $idkategori 
-        // AND a.idJudulData = $idjuduldata
-        // AND year(a.tgl) = year(curdate())
-        // ");
+    //QUERI SIMPAN DATA
+    function SimpanDataSiga2()
+    {
+        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
+        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
+        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
+        $idKec = $this->db->escape_str($this->input->post('idKec'));
+        $jenisKelamin = $this->db->escape_str($this->input->post('jenisKelamin'));
+        $nilai = $this->db->escape_str($this->input->post('nilai'));
+        $tahun = $this->db->escape_str($this->input->post('tahun'));
+        $tgl = Date("Y-m-d");
+        $sql = $this->db->query("
+        INSERT INTO `tbl_siga2`(`idSiga2`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idKec`, `jenisKelamin`, `nilai`, `tahun`, `tgl`) VALUES (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$idKec','$jenisKelamin','$nilai','$tahun','$tgl')
+        ");
+        return $sql;
     }
 
+
+    function SimpanDataSiga3()
+    {
+        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
+        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
+        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
+        $idKec = $this->db->escape_str($this->input->post('idKec'));
+        $jenisKelamin = $this->db->escape_str($this->input->post('jenisKelamin'));
+        $nilai = $this->db->escape_str($this->input->post('nilai'));
+        $tahun = $this->db->escape_str($this->input->post('tahun'));
+        $tgl = Date("Y-m-d");
+        $sql = $this->db->query("
+        INSERT INTO `tbl_siga3`(`idSiga3`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idKec`, `jenisKelamin`, `nilai`, `tahun`, `tgl`) VALUES (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$idKec','$jenisKelamin','$nilai','$tahun','$tgl')
+        ");
+        return $sql;
+    }
+
+    function SimpanDataSiga4()
+    {
+        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
+        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
+        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
+        $idKec = $this->db->escape_str($this->input->post('idKec'));
+        $jenisKelamin = $this->db->escape_str($this->input->post('jenisKelamin'));
+        $umur = $this->db->escape_str($this->input->post('umur'));
+        $nilai = $this->db->escape_str($this->input->post('nilai'));
+        $tahun = $this->db->escape_str($this->input->post('tahun'));
+        $tgl = Date("Y-m-d");
+        $sql = $this->db->query("
+        INSERT INTO `tbl_siga4`(`idSiga4`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idKec`, `jenisKelamin`,`umur`, `nilai`, `tahun`, `tgl`) VALUES (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$idKec','$jenisKelamin','$umur','$nilai','$tahun','$tgl')
+        ");
+        return $sql;
+    }
+
+    function SimpanDataSiga5()
+    {
+        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
+        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
+        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
+        $idKec = $this->db->escape_str($this->input->post('idKec'));
+        $jenisKelamin = $this->db->escape_str($this->input->post('jenisKelamin'));
+        $nilai = $this->db->escape_str($this->input->post('nilai'));
+        $tahun = $this->db->escape_str($this->input->post('tahun'));
+        $tgl = Date("Y-m-d");
+        $sql = $this->db->query("
+        INSERT INTO `tbl_siga5`(`idSiga5`, `idUnitKerja`, `idKategoriData`, `idJudulData`, `idKec`, `jenisKelamin`, `nilai`, `tahun`, `tgl`) VALUES (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$idKec','$jenisKelamin','$nilai','$tahun','$tgl')
+        ");
+        return $sql;
+    }
+
+    function SimpanDataSiga6()
+    {
+
+        $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
+        $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
+        $idJudulData = $this->db->escape_str($this->input->post('idJudulData'));
+        $kabupaten = $this->db->escape_str($this->input->post('kabupaten'));
+        $ipm = $this->db->escape_str($this->input->post('ipm'));
+        $ipg = $this->db->escape_str($this->input->post('ipg'));
+        $idg = $this->db->escape_str($this->input->post('idg'));
+        $tahun = $this->db->escape_str($this->input->post('tahun'));
+        $tgl = Date("Y-m-d");
+        $sql = $this->db->query("
+        INSERT INTO `tbl_siga6`(`idSiga6`, `idUnitKerja`,`idKategoriData`,`idJudulData`, `kabupaten`, `ipm`, `ipg`, `idg`, `tahun`, `tgl`) VALUES (NULL,'$idUnitKerja','$idKategoriData','$idJudulData','$kabupaten','$ipm','$ipg','$idg','$tahun','$tgl')
+        ");
+        return $sql;
+    }
+    //QUERI SIMPAN DATA
+
+    //QUERI HAPUS DATA
+    function HapusDataSiga2($idSiga)
+    {
+        $sql = $this->db->query(" DELETE FROM `tbl_siga2` WHERE idSiga2='$idSiga'");
+        return $sql;
+    }
+    //QUERI HAPUS DATA
+
+
+
+
+    //DEPAN 
     public function getDataRezky($id_kategori, $id_juduldata, $tahunawal, $tahunakhir)
     {
         $tahuntengah = $tahunawal + 1;

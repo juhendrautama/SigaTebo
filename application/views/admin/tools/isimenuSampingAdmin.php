@@ -25,6 +25,18 @@
 </li>
 <li class="nav-header">Data</li>
 <li class="nav-item">
+    <a href="adminpanel/DataKec" style="color:#fff; " class="nav-link 
+                        <?php if ($this->uri->segment('2') == 'DataKec') {
+                            echo "active";
+                        } else {
+                        } ?>">
+        <i class="nav-icon fas fa-database"></i>
+        <p style="font-size:13px;">
+            Table 1 / Data Kecamatan
+        </p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="adminpanel/KategoriData" style="color:#fff;" class="nav-link 
                         <?php if ($this->uri->segment('2') == 'KategoriData') {
                             echo "active";

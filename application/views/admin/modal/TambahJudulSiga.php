@@ -35,6 +35,17 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
+                            <label class="col-form-label">Format Tabel :</label>
+                            <select required name="formatTabel" id="idformatTabel" class="form-control" style="width:100%;">
+                                <option value="" disabled selected>Pilih Format Tabel..</option>
+                                <?php for ($i = 2; $i <= 52; $i++) { ?>
+                                    <option value="<?= $i; ?>">Tabel <?= $i; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
                             <label class="col-form-label"> Judul :</label>
                             <input class="form-control" type="text" value="" name="judul" required>
                         </div>

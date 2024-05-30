@@ -61,12 +61,13 @@ class M_crud_JudulSiga extends CI_Model
         $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
         $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
         $judul = $this->db->escape_str($this->input->post('judul'));
+        $formatTabel = $this->db->escape_str($this->input->post('formatTabel'));
         $tgl = Date("Y-m-d");
         $sql = $this->db->query("INSERT INTO 
         `tbl_judulData`
-        (`idJudulData`,`id_admin`,`idUnitKerja`, `idKategoriData`,  `judul`, `tgl`) 
+        (`idJudulData`,`id_admin`,`idUnitKerja`, `idKategoriData`,  `judul`,`formatTabel`, `tgl`) 
         VALUES 
-        (NULL,'$id_admin','$idUnitKerja','$idKategoriData','$judul','$tgl')");
+        (NULL,'$id_admin','$idUnitKerja','$idKategoriData','$judul','$formatTabel','$tgl')");
         return $sql;
     }
 
@@ -81,7 +82,8 @@ class M_crud_JudulSiga extends CI_Model
         tbl_judulData.`idUnitKerja`, 
         tbl_judulData.`idKategoriData`, 
         tbl_judulData.`judul`, 
-        tbl_judulData.`tgl`, 
+        tbl_judulData.`tgl`,
+        tbl_judulData.`formatTabel`, 
         tbl_kategoriData.`nama`
         FROM 
         `tbl_judulData`
@@ -100,12 +102,13 @@ class M_crud_JudulSiga extends CI_Model
         $idUnitKerja = $this->session->userdata('idUnitKerja');
         $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
         $judul = $this->db->escape_str($this->input->post('judul'));
+        $formatTabel = $this->db->escape_str($this->input->post('formatTabel'));
         $tgl = Date("Y-m-d");
         $sql = $this->db->query("INSERT INTO 
         `tbl_judulData`
-        (`idJudulData`,`id_admin`,`idUnitKerja`, `idKategoriData`,  `judul`, `tgl`) 
+        (`idJudulData`,`id_admin`,`idUnitKerja`, `idKategoriData`,  `judul`,`formatTabel`, `tgl`) 
         VALUES 
-        (NULL,'$id_admin','$idUnitKerja','$idKategoriData','$judul','$tgl')");
+        (NULL,'$id_admin','$idUnitKerja','$idKategoriData','$judul','$formatTabel',$tgl')");
         return $sql;
     }
 
@@ -116,6 +119,7 @@ class M_crud_JudulSiga extends CI_Model
         $idUnitKerja = $this->db->escape_str($this->input->post('idUnitKerja'));
         $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
         $judul = $this->db->escape_str($this->input->post('judul'));
+        $formatTabel = $this->db->escape_str($this->input->post('formatTabel'));
         $tgl = Date("Y-m-d");
         $sql = $this->db->query("
         UPDATE `tbl_judulData` 
@@ -140,7 +144,7 @@ class M_crud_JudulSiga extends CI_Model
 
     function GetDataIdJudul($id)
     {
-        $hsl = $this->db->query("SELECT `idJudulData`,`id_admin`,`idUnitKerja`, `idKategoriData`,  `judul`, `tgl` FROM `tbl_judulData` where idJudulData='$id'");
+        $hsl = $this->db->query("SELECT `idJudulData`,`id_admin`,`idUnitKerja`, `idKategoriData`,  `judul`,`formatTabel`, `tgl` FROM `tbl_judulData` where idJudulData='$id'");
         return $hsl;
     }
 
@@ -151,6 +155,7 @@ class M_crud_JudulSiga extends CI_Model
         $idUnitKerja = $this->session->userdata('idUnitKerja');
         $idKategoriData = $this->db->escape_str($this->input->post('idKategoriData'));
         $judul = $this->db->escape_str($this->input->post('judul'));
+        $formatTabel = $this->db->escape_str($this->input->post('formatTabel'));
         $tgl = Date("Y-m-d");
         $sql = $this->db->query("
         UPDATE `tbl_judulData` 
@@ -159,6 +164,7 @@ class M_crud_JudulSiga extends CI_Model
         `idUnitKerja`='$idUnitKerja',
         `idKategoriData`='$idKategoriData',
         `judul`='$judul',
+        `formatTabel`='$formatTabel',
         `tgl`='$tgl'
         where
         idJudulData = '$id'  
