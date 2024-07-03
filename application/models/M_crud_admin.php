@@ -2,38 +2,16 @@
 
 class M_crud_admin extends CI_Model
 {
-
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
 	}
-
-
 	function GetUserAll()
 	{
-		$hsl = $this->db->query("
-		SELECT 
-		tbl_admin.`id_admin`, 
-		tbl_admin.`idUnitKerja`, 
-		tbl_admin.`nama_admin`, 
-		tbl_admin.`user`,
-		tbl_admin.`KodeLogin`, 
-		tbl_admin.`pass`, 
-		tbl_admin.`pass_samaran`, 
-		tbl_admin.`alamat`, 
-		tbl_admin.`no_tlpn`, 
-		tbl_admin.`level`, 
-		tbl_admin.`tgl`,
-		tbl_unitKerja.`namaUnit`
-		FROM 
-		`tbl_admin`
-		INNER JOIN 
-		`tbl_unitKerja` 
-		ON 
-		tbl_admin.`idUnitKerja` = tbl_unitKerja.`idUnitKerja`;
-
-		");
+		$hsl = $this->db->query("SELECT `id_admin`, 
+		(SELECT namaUnit FROM tbl_unitKerja  WHERE tbl_unitKerja.idUnitKerja = tbl_admin.idUnitKerja ) as namaUnit, 
+		`nama_admin`, `user`, `pass`,`pass_samaran`, `alamat`, `no_tlpn`, `level`,`KodeLogin`, `tgl` FROM `tbl_admin`");
 		return $hsl;
 	}
 

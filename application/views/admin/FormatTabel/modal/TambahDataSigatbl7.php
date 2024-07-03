@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">
-                    <i class="nav-icon fa fa-edit"></i> Tambah Data Siga Tabel 7
+                    <i class="nav-icon fa fa-edit"></i> Tambah Data Siga Tabel <?= $GetDataIdJudul->formatTabel ?>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -19,7 +19,7 @@
                     <input hidden type="text" name="idJudulData" value="<?php echo $GetDataIdJudul->idJudulData ?>">
 
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label class="col-form-label">Kecamatan :</label>
                             <select required name="idKec" id="kecamatan" class="form-control" style="width:100%;">
                                 <option value="" disabled selected>Pilih Kecamatan...</option>
@@ -30,19 +30,9 @@
                                 <?php } ?>
                             </select>
                         </div>
-
-                        <div class="form-group col-md-4">
-                            <label class="col-form-label">Jenis Kelamin :</label>
-                            <select required name="jenisKelamin" id="jeniskelamin" class="form-control"
-                                style="width:100%;">
-                                <option value="">Pilih...</option>
-                                <option value="L">Laki - Laki</option>
-                                <option value="P">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="col-form-label"> Umur :</label>
-                            <input class="form-control" type="number" value="" name="umur" required>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label"> Usia :</label>
+                            <input class="form-control" type="number" value="" name="usia" required>
                         </div>
 
                     </div>
@@ -56,7 +46,7 @@
                             <select required name="tahun" id="tahun" class="form-control" style="width:100%;">
                                 <option value="">Pilih...</option>
                                 <?php
-                                $startYear = 1992;
+                                $startYear = 2022;
                                 $currentYear = date("Y"); // Mendapatkan tahun saat ini
                                 for ($year = $startYear; $year <= $currentYear; $year++) {
                                     echo "<option value=\"$year\">$year</option>";

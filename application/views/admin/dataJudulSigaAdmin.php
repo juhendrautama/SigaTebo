@@ -43,6 +43,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Judul</th>
+                                        <th>Format Tabel</th>
                                         <th>Unit Kerja</th>
                                         <th>Kategori</th>
                                         <th>Tanggal</th>
@@ -55,6 +56,7 @@
                                     <tr>
                                         <td><?php echo $no; ?></td>
                                         <td><?php echo $row->judul; ?></td>
+                                        <td>Tabel <?php echo $row->formatTabel; ?></td>
                                         <td><?php echo $row->namaUnit; ?></td>
                                         <td><?php echo $row->namaKategori; ?></td>
                                         <?php setlocale(LC_TIME, 'id_ID'); ?>

@@ -24,18 +24,7 @@
     </a>
 </li>
 <li class="nav-header">Data</li>
-<li class="nav-item">
-    <a href="adminpanel/JudulDataSiga" style="color:#fff;" class="nav-link 
-                        <?php if ($this->uri->segment('2') == 'JudulDataSiga') {
-                            echo "active";
-                        } else {
-                        } ?>">
-        <i class="nav-icon fas fa-database"></i>
-        <p>
-            Data Judul SIGA
-        </p>
-    </a>
-</li>
+
 <li class="nav-item">
     <a href="adminpanel/DataSigaUser" style="color:#fff;" class="nav-link 
                         <?php if ($this->uri->segment('2') == 'DataSigaUser') {

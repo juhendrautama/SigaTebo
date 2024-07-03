@@ -17,11 +17,13 @@
                 <li class="dropdown"><a href="#"><span>Kategori</span> <i class="bi bi-chevron-down"></i></a>
                     <ul style="max-width: 215px; overflow: hidden; ">
                         <?php foreach ($GetKategoriAll->result() as $row) { ?>
-                            <li class="p-1">
-                                <a class="a " href="Kategori/Detail/<?php echo $row->idKategoriData; ?>/<?php echo str_replace(' ', '-', $row->nama); ?>#Kategori" style=" white-space: normal; word-wrap: break-word;">
-                                    <?php echo $row->nama; ?>
-                                </a>
-                            </li>
+                        <li class="p-1">
+                            <a class="a "
+                                href="Kategori/Detail/<?php echo $row->idKategoriData; ?>/<?php echo str_replace(' ', '-', $row->nama); ?>#Kategori"
+                                style=" white-space: normal; word-wrap: break-word;">
+                                <?php echo $row->nama; ?>
+                            </a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </li>

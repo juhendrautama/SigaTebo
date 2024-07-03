@@ -16,13 +16,33 @@ class Data extends CI_Controller
         $tahun_end = date('Y');
         $tahun_start = $tahun_end - 2;
 
+        $tahunAwal = '2022';
+        $tahunAkhir = '2023';
+        $data['tahunAwal'] = $tahunAwal;
+        $data['tahunAkhir'] = $tahunAkhir;
+
         $data['idkategori'] = $idKategoriData;
         $data['idjudul'] = $idJudulData;
         $data['GetKategoriAll'] = $this->M_crud_kategoriData->GetKategoriAll();
         $data['GetDataIdJudul'] = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
         $data['GetDataIdKategori'] = $this->M_crud_kategoriData->GetDataIdKategori($idKategoriData)->row();
-        $data['GetDataSigaDetail'] = $this->M_crud_Data->GetDataSigaDetail($idKategoriData, $idJudulData);
-        $data['getdata'] = $this->M_crud_Data->getDataRezky($idKategoriData, $idJudulData, $tahun_start, $tahun_end)->result();
+
+        $datajudul = $this->M_crud_JudulSiga->GetDataIdJudul($idJudulData)->row();
+        for ($i = 2; $i <= 53; $i++) {
+            if ($datajudul->formatTabel == (string)$i) {
+                $methodName = 'getData' . $i;
+                if (method_exists($this->M_crud_Data, $methodName)) {
+                    $data['tampildatasiga'] = $this->M_crud_Data->$methodName($idKategoriData, $idJudulData, $tahunAwal, $tahunAkhir);
+                } else {
+                    // Handle the case where the method does not exist
+                    $data['tampildatasiga'] = null;
+                    // You can also log an error or throw an exception here
+                }
+                break; // Keluar dari loop setelah menemukan kecocokan
+            }
+        }
+
+
         $this->load->view('lending/dataSigaDetail', $data);
     }
 

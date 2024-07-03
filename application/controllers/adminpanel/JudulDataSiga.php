@@ -23,39 +23,36 @@ class JudulDataSiga extends CI_Controller
 
     public function index()
     {
-        if ($this->session->userdata('level') == '1') {
-            $data['GetUnitAll'] = $this->M_crud_unit->GetDataunit();
-            $data['GetKategoriAll'] = $this->M_crud_kategoriData->GetKategoriAll();
-            $data['GetJudulSigaAll'] = $this->M_crud_JudulSiga->GetJudulSigaAll();
-            $this->load->view('Admin/dataJudulSigaAdmin', $data);
-        } else {
-            $idUnitKerja = $this->session->userdata('idUnitKerja');
-            $data['GetKategoriAll'] = $this->M_crud_kategoriData->GetKategoriAll();
-            $data['GetJudulSiga'] = $this->M_crud_JudulSiga->GetJudulSiga($idUnitKerja);
-            $this->load->view('User/dataJudulSiga', $data);
-        }
+        $data['GetUnitAll'] = $this->M_crud_unit->GetDataunit();
+        $data['GetKategoriAll'] = $this->M_crud_kategoriData->GetKategoriAll();
+        $data['GetJudulSigaAll'] = $this->M_crud_JudulSiga->GetJudulSigaAll();
+        $data['GetAllformatTabel'] = $this->M_crud_JudulSiga->GetAllformatTabel();
+        $this->load->view('admin/dataJudulSigaAdmin', $data);
     }
 
     public function SimpanData()
     {
         if ($this->session->userdata('level') == '1') {
             if (isset($_POST['proses'])) {
-                $hasil = $this->M_crud_JudulSiga->SimpanDataAdmin();
-                if ($hasil) { ?>
-<script type="text/javascript">
-window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
-</script>
-<?php
+                $ubahFormattbl = $this->M_crud_JudulSiga->UbahKodeFormattbl();
+                if ($ubahFormattbl == true) {
+                    $hasil = $this->M_crud_JudulSiga->SimpanDataAdmin();
+                    if ($hasil) { ?>
+                        <script type="text/javascript">
+                            window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
+                        </script>
+                    <?php
+                    }
                 }
             }
         } else {
             if (isset($_POST['proses'])) {
                 $hasil = $this->M_crud_JudulSiga->SimpanData();
                 if ($hasil) { ?>
-<script type="text/javascript">
-window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
-</script>
-<?php
+                    <script type="text/javascript">
+                        window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
+                    </script>
+                <?php
                 }
             }
         }
@@ -68,11 +65,13 @@ window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
             $data['GetUnitAll'] = $this->M_crud_unit->GetDataunit();
             $data['GetKategoriAll'] = $this->M_crud_kategoriData->GetKategoriAll();
             $data['GetDataIdJudul'] = $this->M_crud_JudulSiga->GetDataIdJudul($id)->row();
-            $this->load->view('Admin/modal/isiEditJudulSiga', $data);
+            $data['GetAllformatTabel'] = $this->M_crud_JudulSiga->GetAllformatTabel();
+            $this->load->view('admin/modal/isiEditJudulSiga', $data);
         } else {
             $id = $this->input->post('id');
             $data['GetKategoriAll'] = $this->M_crud_kategoriData->GetKategoriAll();
             $data['GetDataIdJudul'] = $this->M_crud_JudulSiga->GetDataIdJudul($id)->row();
+            $data['GetAllformatTabel'] = $this->M_crud_JudulSiga->GetAllformatTabel();
             $this->load->view('User/modal/isiEditJudulSiga', $data);
         }
     }
@@ -83,20 +82,20 @@ window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
             if (isset($_POST['proses'])) {
                 $hasil = $this->M_crud_JudulSiga->SimpanUbahJudulSigaA();
                 if ($hasil) { ?>
-<script type="text/javascript">
-window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
-</script>
-<?php
+                    <script type="text/javascript">
+                        window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
+                    </script>
+                <?php
                 }
             }
         } else {
             if (isset($_POST['proses'])) {
                 $hasil = $this->M_crud_JudulSiga->SimpanUbahJudulSiga();
                 if ($hasil) { ?>
-<script type="text/javascript">
-window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
-</script>
-<?php
+                    <script type="text/javascript">
+                        window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
+                    </script>
+            <?php
                 }
             }
         }
@@ -106,9 +105,9 @@ window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
     {
         $hasil = $this->M_crud_JudulSiga->HapusDataKategori($id);
         if ($hasil) { ?>
-<script type="text/javascript">
-window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
-</script>
+            <script type="text/javascript">
+                window.location = "<?php echo base_url() ?>adminpanel/JudulDataSiga";
+            </script>
 <?php
         }
     }

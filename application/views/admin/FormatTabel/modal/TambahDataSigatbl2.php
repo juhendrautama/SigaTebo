@@ -1,10 +1,10 @@
-<div class="modal fade " id="TambahDataSigatbl2" data-backdrop="static" data-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade " id="TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>" data-backdrop="static"
+    data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">
-                    <i class="nav-icon fa fa-edit"></i> Tambah Data Siga Tabel 2
+                    <i class="nav-icon fa fa-edit"></i> Tambah Data Siga Tabel <?= $GetDataIdJudul->formatTabel ?>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -75,16 +75,16 @@
 <?php $this->load->view('admin/tools/js_footer'); ?>
 <script type="text/javascript">
 $('#kecamatan').select2({
-    dropdownParent: $('#TambahDataSigatbl2'),
+    dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
     placeholder: "Pilih Kec..."
 });
 $('#jeniskelamin').select2({
-    dropdownParent: $('#TambahDataSigatbl2'),
+    dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
     placeholder: "Pilih..."
 });
 
 $('#tahun').select2({
-    dropdownParent: $('#TambahDataSigatbl2'),
+    dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
     placeholder: "Pilih Tahun..."
 });
 </script>

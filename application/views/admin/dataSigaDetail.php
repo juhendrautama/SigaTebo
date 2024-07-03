@@ -21,7 +21,8 @@
                 <div class="container-fluid">
                     <div class="card shadow">
                         <div class="card-header">
-                            <a href="adminpanel/DataSigaAdmin/Kategori/<?php echo $GetDataIdUnit->idUnitKerja ?>" class="btn btn-success btn-sm elevation-1">
+                            <a href="adminpanel/DataSigaAdmin/Kategori/<?php echo $GetDataIdUnit->idUnitKerja ?>"
+                                class="btn btn-success btn-sm elevation-1">
                                 <i class="nav-icon  fas fa-reply"></i>
                             </a>
                             <hr>
@@ -39,7 +40,7 @@
                         </div>
                         <div class="card-body ">
                             <?php
-                            for ($i = 2; $i <= 52; $i++) {
+                            for ($i = 2; $i <= 53; $i++) {
                                 if ($GetDataIdJudul->formatTabel == (string)$i) {
                                     $this->load->view('admin/FormatTabel/tbl' . $i);
                                     break; // keluar dari loop setelah menemukan kecocokan
@@ -54,7 +55,8 @@
         <?php $this->load->view('admin/tools/footer'); ?>
     </div>
     <!-- Modal data -->
-    <div class="modal fade " id="editDataSiga" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade " id="editDataSiga" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content ">
                 <div class="modal-header">
@@ -80,25 +82,25 @@
     <?php $this->load->view('admin/tools/js_footer'); ?>
 </body>
 <script type="text/javascript">
-    $('#editDataSiga').on('show.bs.modal', function(e) {
-        var id = $(e.relatedTarget).data('id');
-        var idunit = $(e.relatedTarget).data('idunit');
-        var idkate = $(e.relatedTarget).data('idkate');
-        var idjudul = $(e.relatedTarget).data('idjudul');
-        $.ajax({
-            type: 'post',
-            url: "<?php echo base_url(); ?>adminpanel/DataSigaAdmin/GetDataIdSiga",
-            data: {
-                id: id,
-                idunit: idunit,
-                idkate: idkate,
-                idjudul: idjudul
-            },
-            success: function(data) {
-                $('.isiEditDataSiga').html(data);
-            }
-        });
+$('#editDataSiga').on('show.bs.modal', function(e) {
+    var id = $(e.relatedTarget).data('id');
+    var idunit = $(e.relatedTarget).data('idunit');
+    var idkate = $(e.relatedTarget).data('idkate');
+    var idjudul = $(e.relatedTarget).data('idjudul');
+    $.ajax({
+        type: 'post',
+        url: "<?php echo base_url(); ?>adminpanel/DataSigaAdmin/GetDataIdSiga",
+        data: {
+            id: id,
+            idunit: idunit,
+            idkate: idkate,
+            idjudul: idjudul
+        },
+        success: function(data) {
+            $('.isiEditDataSiga').html(data);
+        }
     });
+});
 </script>
 
 </html>

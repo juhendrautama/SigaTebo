@@ -4,61 +4,47 @@
 <?php $this->load->view('admin/FormatTabel/modal/TambahDataSigatbl4');
 ?>
 <hr>
-<table id="example" class="table table-bordered table-hover " style="font-size:12px; width: 100%;">
+
+<table id="tbl2" class="table table-bordered table-hover " style="font-size:12px; width: 100%;">
     <thead>
-        <tr style="text-align: center; vertical-align: middle;">
-            <th style="text-align: center; vertical-align: middle;" rowspan="3">No</th>
-            <th style="text-align: center; vertical-align: middle;" rowspan="3">KECAMATAN</th>
-            <th colspan="10">KELOMPOK UMUR</th>
-            <th style="text-align: center; vertical-align: middle;" rowspan="3">
-                <center>Jumlah</center>
-            </th>
-            <th style="text-align: center; vertical-align: middle;" rowspan="3">
+        <tr>
+            <th>No</th>
+            <th>KECAMATAN</th>
+            <th>Jenis Kelamin</th>
+            <th>Umur</th>
+            <th>Nilai</th>
+            <th>
                 <center>Aksi</center>
             </th>
         </tr>
-        <tr>
-            <th colspan="2">0-5 Tahun</th>
-            <th colspan="2">6-12 Tahun</th>
-            <th colspan="2">13-17 Tahun</th>
-            <th colspan="2">18-50 Tahun</th>
-            <th colspan="2">51 Tahun Keatas</th>
-        </tr>
-        <tr>
-            <td>L</td>
-            <td>P</td>
-
-            <td>L</td>
-            <td>P</td>
-
-            <td>L</td>
-            <td>P</td>
-
-            <td>L</td>
-            <td>P</td>
-
-            <td>L</td>
-            <td>P</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
     </thead>
     <tbody>
-
+        <?php $no = 1;
+        foreach ($tampilsiga->result() as $row) { ?>
+            <tr>
+                <td><?php echo $no; ?></td>
+                <td><?php echo $row->namaKec; ?></td>
+                <td><?php echo $row->jenisKelamin; ?></td>
+                <td><?php echo $row->umur; ?></td>
+                <td><?php echo $row->nilai; ?></td>
+                <td>
+                    <center>
+                        <a href="adminpanel/DataSigaAdmin/HapusDataSiga/<?php echo $row->idSiga4; ?>/<?php echo $row->idUnitKerja; ?>/<?php echo $row->idKategoriData; ?>/<?php echo $row->idJudulData; ?>" class="btn btn-warning btn-sm elevation-1">
+                            <i class="nav-icon fas fa-trash"></i>
+                        </a>
+                        <!-- <a href="#" class="btn btn-primary btn-sm elevation-1" data-toggle="modal" data-target="#editDataKetegori" data-id='<?php echo $row->idSiga4; ?>'>
+                            <i class="nav-icon fas fa-edit"></i>
+                        </a> -->
+                    </center>
+                </td>
+            </tr>
+        <?php $no++;
+        } ?>
     </tbody>
 </table>
+<?php $this->load->view('admin/tools/js_footer'); ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tbl2').DataTable();
+    });
+</script>

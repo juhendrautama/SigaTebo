@@ -43,7 +43,7 @@ class DataKec extends CI_Controller
 
     public function HapusData($id)
     {
-        $hasil = $this->M_crud_wilayah->HapusData($id);
+        $hasil = $this->M_crud_wilayah->UbahStatus($id);
         if ($hasil) { ?>
             <script type="text/javascript">
                 window.location = "<?php echo base_url() ?>adminpanel/DataKec";

@@ -11,7 +11,13 @@ class M_crud_wilayah extends CI_Model
 
     function GetDataKec()
     {
-        $hsl = $this->db->query("SELECT `idKec`, `namaKec`, `jumdesa`, `jumkel`, `luas`, `jumdusun`, `jumrt`, `jumrw`,`tgl` FROM `tbl_kecTebo`");
+        $hsl = $this->db->query("SELECT `idKec`, `namaKec`, `jumdesa`, `jumkel`, `luas`, `jumdusun`, `jumrt`, `jumrw`,`statusData`,`tgl` FROM `tbl_kecTebo` where statusData='1'");
+        return $hsl;
+    }
+
+    function GetDatauptPuskesmas()
+    {
+        $hsl = $this->db->query("SELECT `idPuskesmas`, `nama`, `tgl` FROM `tbl_uptPuskesmas`");
         return $hsl;
     }
 
@@ -25,15 +31,24 @@ class M_crud_wilayah extends CI_Model
         $jumrt = $this->db->escape_str($this->input->post('jumrt'));
         $jumrw = $this->db->escape_str($this->input->post('jumrw'));
         $tgl = Date("Y-m-d");
-        $sql = $this->db->query("INSERT INTO `tbl_kecTebo`(`idKec`, `namaKec`, `jumdesa`, `jumkel`, `luas`, `jumdusun`, `jumrt`, `jumrw`,`tgl`) VALUES (NULL,'$namaKec','$jumdesa','$jumkel','$luas','$jumdusun','$jumrt','$jumrw','$tgl')");
+        $sql = $this->db->query("INSERT INTO `tbl_kecTebo`(`idKec`, `namaKec`, `jumdesa`, `jumkel`, `luas`, `jumdusun`, `jumrt`, `jumrw`,`statusData`,`tgl`) VALUES (NULL,'$namaKec','$jumdesa','$jumkel','$luas','$jumdusun','$jumrt','$jumrw','1','$tgl')");
         return $sql;
     }
 
-    function HapusData($id)
+
+    function UbahStatus($id)
     {
-        $sql = $this->db->query(" DELETE FROM `tbl_kecTebo` WHERE idKec='$id'");
+        $sql = $this->db->query("
+        UPDATE `tbl_kecTebo` SET `statusData`='2' WHERE `idKec`='$id'
+        ");
         return $sql;
     }
+
+    // function HapusData($id)
+    // {
+    //     $sql = $this->db->query(" DELETE FROM `tbl_kecTebo` WHERE idKec='$id'");
+    //     return $sql;
+    // }
 
     function GetData()
     {

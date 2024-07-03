@@ -1,4 +1,5 @@
-<div class="modal fade " id="TambahJudulSiga" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade " id="TambahJudulSiga" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,10 +15,11 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="col-form-label">Unit Kerja :</label>
-                            <select required name="idUnitKerja" id="idUnitKerja" class="form-control" style="width:100%;">
+                            <select required name="idUnitKerja" id="idUnitKerja" class="form-control"
+                                style="width:100%;">
                                 <option value="" disabled selected>Pilih Unit..</option>
                                 <?php foreach ($GetUnitAll->result() as $row) { ?>
-                                    <option value="<?= $row->idUnitKerja; ?>"><?= $row->namaUnit; ?></option>
+                                <option value="<?= $row->idUnitKerja; ?>"><?= $row->namaUnit; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -25,10 +27,11 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="col-form-label">Kategori Siga :</label>
-                            <select required name="idKategoriData" id="kategori" class="form-control" style="width:100%;">
+                            <select required name="idKategoriData" id="kategori" class="form-control"
+                                style="width:100%;">
                                 <option value="" disabled selected>Pilih Kategori...</option>
                                 <?php foreach ($GetKategoriAll->result() as $row) { ?>
-                                    <option value="<?= $row->idKategoriData; ?>"><?= $row->nama; ?></option>
+                                <option value="<?= $row->idKategoriData; ?>"><?= $row->nama; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -36,10 +39,14 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="col-form-label">Format Tabel :</label>
-                            <select required name="formatTabel" id="idformatTabel" class="form-control" style="width:100%;">
+                            <select required name="formatTabel" id="idformatTabel" class="form-control"
+                                style="width:100%;">
                                 <option value="" disabled selected>Pilih Format Tabel..</option>
-                                <?php for ($i = 2; $i <= 52; $i++) { ?>
-                                    <option value="<?= $i; ?>">Tabel <?= $i; ?></option>
+                                <?php // for ($i = 2; $i <= 52; $i++) { ?>
+                                <!-- <option value="<?= $i; ?>"><?= $i; ?></option> -->
+                                <?php // } ?>
+                                <?php foreach ($GetAllformatTabel->result() as $row) { ?>
+                                <option value="<?= $row->nilaiFormat; ?>"> Tabel <?= $row->nilaiFormat; ?></option>
                                 <?php } ?>
                             </select>
                         </div>

@@ -25,23 +25,16 @@
                                 <i class="nav-icon  fas fa-tachometer-alt"></i>
                             </a>
                             <center>
-                                <h5><b>Data Judul Data Siga</b></h5>
+                                <h5><b>Data Siga</b></h5>
                             </center>
                         </div>
                         <div class="card-body ">
-                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal"
-                                data-target="#TambahJudulSiga">
-                                <i class="nav-icon  fas fa-plus"></i> Tambah Data
-                            </a>
-
-                            <?php $this->load->view('User/modal/TambahJudulSiga'); ?>
-
-                            <hr>
                             <table id="example" class="table table-bordered table-hover "
                                 style="font-size:14px; width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Format Tabel</th>
                                         <th>Kategori</th>
                                         <th>Judul</th>
                                         <th>Tanggal</th>
@@ -53,20 +46,17 @@
                                     foreach ($GetJudulSiga->result() as $row) { ?>
                                     <tr>
                                         <td><?php echo $no; ?></td>
+                                        <td>Tabel <?php echo $row->formatTabel; ?></td>
                                         <td><?php echo $row->nama; ?></td>
                                         <td><?php echo $row->judul; ?></td>
                                         <?php setlocale(LC_TIME, 'id_ID'); ?>
                                         <td><?php echo date('d F Y', strtotime($row->tgl)); ?></td>
-                                        <td align="center">
-                                            <!-- <a href="adminpanel/JudulDataSiga/HapusDataKategori/<?php echo $row->idJudulData; ?>"
-                                                onclick="return confirm('Apakah yakin ingin dihapus?');"
-                                                class="btn btn-warning btn-sm elevation-1">
-                                                <i class="nav-icon fas fa-trash"></i>
-                                            </a> -->
-                                            <a href="#" class="btn btn-success btn-sm elevation-1" data-toggle="modal"
-                                                data-target="#editDataJudulSiga"
-                                                data-id='<?php echo $row->idJudulData; ?>'>
-                                                <i class="nav-icon fas fa-edit"></i>
+                                        <td align="center" style="width:90px;">
+                                            <a style="font-size:12px;"
+                                                href="adminpanel/DataSigaUser/Data/<?php echo $row->idUnitKerja; ?>/<?php echo $row->idKategoriData; ?>/<?php echo $row->idJudulData; ?>/<?php echo str_replace(' ', '-', $row->judul); ?>"
+                                                class="btn btn-success btn-sm elevation-1">
+                                                <i style="font-size:12px;" class="nav-icon fas fa-plus"></i> Data
+                                                Siga
                                             </a>
                                         </td>
                                     </tr>
@@ -82,31 +72,7 @@
         </div>
         <?php $this->load->view('admin/tools/footer'); ?>
     </div>
-    <!-- Modal data -->
-    <div class="modal fade " id="editDataJudulSiga" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content ">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">
-                        <i class="nav-icon fa fa-edit"></i> Ubah Data Judul Siga
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="adminpanel/JudulDataSiga/SimpanUbahJudulSiga" method="POST">
-                    <div class="modal-body isiEditDataSiga">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-sm" name="proses">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal data -->
+
     <?php $this->load->view('admin/tools/js_footer'); ?>
 </body>
 <script type="text/javascript">

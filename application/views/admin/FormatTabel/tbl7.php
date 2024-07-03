@@ -4,41 +4,46 @@
 <?php $this->load->view('admin/FormatTabel/modal/TambahDataSigatbl7');
 ?>
 <hr>
-<table id="example" class="table table-bordered table-hover " style="font-size:12px; width: 100%;">
+<table id="tbl7" class="table table-bordered table-hover " style="font-size:12px; width: 100%;">
     <thead>
         <tr>
-            <th style="text-align: center; vertical-align: middle;" rowspan="2">No</th>
-            <th style="text-align: center; vertical-align: middle;" rowspan="2">KECAMATAN</th>
-            <th style="text-align: center; vertical-align: middle;" colspan="3">TAHUN 2022 </th>
-            <th style="text-align: center; vertical-align: middle;" colspan="3">TAHUN 2023 </th>
-            <th style="text-align: center; vertical-align: middle;" rowspan="2">
+            <th>No</th>
+            <th>KECAMATAN</th>
+            <th>Usia</th>
+            <th>Nilai</th>
+            <th>Tahun</th>
+            <th>
                 <center>Aksi</center>
             </th>
         </tr>
-        <tr style="text-align: center; vertical-align: middle;">
-            <th>IPM</th>
-            <th>IPG</th>
-            <th>IDG</th>
-
-            <th>IPM</th>
-            <th>IPG</th>
-            <th>IDG</th>
-        </tr>
-        <tr>
-            <td></td>
-
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td></td>
-        </tr>
     </thead>
     <tbody>
-
+        <?php $no = 1;
+        foreach ($tampilsiga->result() as $row) { ?>
+            <tr>
+                <td><?php echo $no; ?></td>
+                <td><?php echo $row->namaKec; ?></td>
+                <td><?php echo $row->usia; ?></td>
+                <td><?php echo $row->nilai; ?></td>
+                <td><?php echo $row->tahun; ?></td>
+                <td>
+                    <center>
+                        <a href="adminpanel/DataSigaAdmin/HapusDataSiga/<?php echo $row->idSiga7; ?>/<?php echo $row->idUnitKerja; ?>/<?php echo $row->idKategoriData; ?>/<?php echo $row->idJudulData; ?>" class="btn btn-warning btn-sm elevation-1">
+                            <i class="nav-icon fas fa-trash"></i>
+                        </a>
+                        <!-- <a href="#" class="btn btn-primary btn-sm elevation-1" data-toggle="modal" data-target="#editDataKetegori" data-id='<?php echo $row->idSiga7; ?>'>
+                            <i class="nav-icon fas fa-edit"></i>
+                        </a> -->
+                    </center>
+                </td>
+            </tr>
+        <?php $no++;
+        } ?>
     </tbody>
 </table>
+<?php $this->load->view('admin/tools/js_footer'); ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tbl7').DataTable();
+    });
+</script>

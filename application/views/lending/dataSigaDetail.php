@@ -7,7 +7,6 @@
     <!-- <link rel="stylesheet" href="tmpDepan/bootstrap5/css/dataTables.bootstrap5.min.css" /> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -53,51 +52,31 @@
                             Deskripsi Data <br>
                             Sumber : <?php echo $dataUnit->namaUnit; ?>
                         </div>
-                        <div>
-                            <div class="btn-group">
-                                <button id="prev-tahun" class="btn btn-primary"><span
-                                        aria-hidden="true">&laquo;</span></button>
 
-                                <button type="button" class="btn btn-success mx-2 rounded" id="txt-tahun"
-                                    data-kategori='<?= $idkategori ?>' data-judul='<?= $idjudul ?>'
-                                    data-tahun-end='<?= $tahun_end ?>'
-                                    data-tahun-start='<?= $tahun_start ?>'><?= $tahun_start . " - " . $tahun_end ?></button>
-
-                                <button id="next-tahun" class="btn btn-primary"><span
-                                        aria-hidden="true">&raquo;</span></button>
-                            </div>
-                        </div>
                     </div>
-                    <div class="card-body hasilajax">
-                        <table id="example" class="table table-bordered table-hover "
-                            style="font-size:14px; width: 100%;">
-                            <thead style="text-align:center; vertical-align: middle;">
-                                <tr>
-                                    <th width="50px">No</th>
-                                    <th>Elemen Data</th>
-                                    <th class="text-center">Tahun (<?= $tahun_start; ?>)</th>
-                                    <th class="text-center">Tahun (<?= $tahun_start + 1; ?>)</th>
-                                    <th class="text-center">Tahun (<?= $tahun_end; ?>)</th>
-                                    <th>Satuan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($getdata as $row) {
-                                    echo "<tr>";
-                                    echo "<td>" . $no . "</td>";
-                                    echo "<td>" . $row->nama . "</td>";
-                                    echo "<td class='text-center'>" . $row->thn_1 . "</td>";
-                                    echo "<td class='text-center'>" . $row->thn_2 . "</td>";
-                                    echo "<td class='text-center'>" . $row->thn_3 . "</td>";
-                                    echo "<td> Angka </td>";
-                                    echo "</tr>";
-                                    $no++;
+                    <div class="card-body hasilajax table-responsive">
+                        <?php
+                        $found = false; // flag untuk menandai apakah kecocokan ditemukan
+                        for ($i = 2; $i <= 52; $i++) {
+                            if ($GetDataIdJudul->formatTabel == (string)$i) {
+                                $file_path = 'lending/FormatTabel/tbl' . $i . '.php';
+
+                                if (file_exists(APPPATH . 'views/' . $file_path)) {
+                                    $this->load->view($file_path);
+                                    $found = true; // set flag menjadi true jika kecocokan ditemukan dan file ada
+                                } else {
+                                    // Tampilkan pesan jika file tidak ditemukan
+                                    echo $file_path . " : ";
                                 }
-                                ?>
-                            </tbody>
-                        </table>
+
+                                break; // keluar dari loop setelah menemukan kecocokan
+                            }
+                        }
+                        if (!$found) {
+                            $this->load->view('lending/FormatTabel/defaultView');
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -106,7 +85,8 @@
     <!-- ======= konten ======= -->
 
     <!-- ======= Footer ======= -->
-    <?php $this->load->view('lending/tools/footer'); ?>
+    <?php $this->load->view('lending/tools/footer');
+    ?>
     <!-- ======= Footer ======= -->
 
 
@@ -142,7 +122,35 @@
     <!-- <script src="tmpDepan/bootstrap5/js/dataTables.bootstrap5.min.js"></script> -->
     <!-- data tabel -->
     <script>
-    $('#prev-tahun').on('click', function() {
+        new DataTable('#example', {
+            layout: {
+                dom: 'Bfrtip',
+                topStart: {
+                    buttons: [{
+                            extend: 'excel',
+                            className: 'btn btn-success glyphicon glyphicon-list-alt'
+                        },
+                        {
+                            extend: 'pdf',
+                            className: 'btn btn-success glyphicon glyphicon-file'
+                        },
+                        {
+                            extend: 'print',
+                            className: 'btn btn-success glyphicon glyphicon-print'
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+
+
+
+
+
+
+    <!-- <script>
+      $('#prev-tahun').on('click', function() {
         var tahunstart = $('#txt-tahun').data('tahun-start');
         var tahunend = $('#txt-tahun').data('tahun-end');
         var idkategori = $('#txt-tahun').data('kategori');
@@ -199,35 +207,7 @@
             }
         })
     });
-
-    new DataTable('#example', {
-        layout: {
-            topStart: {
-                buttons: [{
-                        extend: 'copy',
-                        className: 'btn btn-success glyphicon glyphicon-duplicate'
-                    },
-                    {
-                        extend: 'csv',
-                        className: 'btn btn-success glyphicon glyphicon-save-file'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-success glyphicon glyphicon-list-alt'
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn btn-success glyphicon glyphicon-file'
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn btn-success glyphicon glyphicon-print'
-                    }
-                ]
-            }
-        }
-    });
-    </script>
+</script> -->
 
 </body>
 

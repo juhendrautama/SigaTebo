@@ -8,6 +8,27 @@ class M_crud_JudulSiga extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+    function GetAllformatTabel()
+    {
+        $hsl = $this->db->query("
+		SELECT `idFormat`, `nilaiFormat`, `kodeDigunakan`, `tgl` FROM `tbl_formatTabel` where kodeDigunakan='aktif'
+		");
+        return $hsl;
+    }
+    function UbahKodeFormattbl()
+    {
+        $formatTabel = $this->db->escape_str($this->input->post('formatTabel'));
+        $sql = $this->db->query("
+        UPDATE `tbl_formatTabel` 
+        SET 
+        `kodeDigunakan`='Nonaktif'
+        where
+        nilaiFormat = '$formatTabel'  
+        ");
+        return $sql;
+    }
+
+
     function GetJudulSigaIdunit($idUnitKerja)
     {
         $hsl = $this->db->query("
@@ -17,6 +38,7 @@ class M_crud_JudulSiga extends CI_Model
         tbl_judulData.`idUnitKerja`, 
         tbl_judulData.`idKategoriData`, 
         tbl_judulData.`judul`, 
+        tbl_judulData.`formatTabel`, 
         tbl_judulData.`tgl`, 
         tbl_kategoriData.`nama`
         FROM 
@@ -36,7 +58,8 @@ class M_crud_JudulSiga extends CI_Model
         tbl_judulData.`id_admin`, 
         tbl_judulData.`idUnitKerja`, 
         tbl_judulData.`idKategoriData`, 
-        tbl_judulData.`judul`, 
+        tbl_judulData.`judul`,
+        tbl_judulData.`formatTabel`, 
         tbl_judulData.`tgl`, 
         tbl_kategoriData.`nama` AS `namaKategori`, 
         tbl_unitKerja.`namaUnit`, 

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">
-                    <i class="nav-icon fa fa-edit"></i> Tambah Data Siga Tabel 6
+                    <i class="nav-icon fa fa-edit"></i> Tambah Data Siga Tabel <?= $GetDataIdJudul->formatTabel ?>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -30,15 +30,15 @@
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label class="col-form-label"> Nilai IPM :</label>
-                            <input class="form-control" type="number" value="" name="ipm" required>
+                            <input class="form-control" type="text" value="" name="ipm" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label class="col-form-label"> Nilai IPG :</label>
-                            <input class="form-control" type="number" value="" name="ipg" required>
+                            <input class="form-control" type="text" value="" name="ipg" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label class="col-form-label"> Nilai IDG :</label>
-                            <input class="form-control" type="number" value="" name="idg" required>
+                            <input class="form-control" type="text" value="" name="idg" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label class="col-form-label"> Tahun :</label>
