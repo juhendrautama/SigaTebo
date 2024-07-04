@@ -3748,5 +3748,317 @@ GROUP BY
         ");
     }
 
+
+    public function getData47($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+       SELECT 
+    tbl_kecTebo.namaKec,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'pengaduan' AND tbl_siga47.tahun = $tahunAwal
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_pengaduan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'pelayanan' AND tbl_siga47.tahun = $tahunAwal
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_pelayanan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'rehabilitasi' AND tbl_siga47.tahun = $tahunAwal
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_rehabilitasi,
+     SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'penegakan' AND tbl_siga47.tahun = $tahunAwal
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_penegakan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'pemulangan' AND tbl_siga47.tahun = $tahunAwal
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_pemulangan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'konseling' AND tbl_siga47.tahun = $tahunAwal
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_konseling,
+
+
+
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'pengaduan' AND tbl_siga47.tahun = $tahunAkhir
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_pengaduan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'pelayanan' AND tbl_siga47.tahun = $tahunAkhir
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_pelayanan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'rehabilitasi' AND tbl_siga47.tahun = $tahunAkhir
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_rehabilitasi,
+     SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'penegakan' AND tbl_siga47.tahun = $tahunAkhir
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_penegakan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'pemulangan' AND tbl_siga47.tahun = $tahunAkhir
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_pemulangan,
+    SUM(CASE 
+        WHEN tbl_siga47.nilai AND tbl_siga47.jenisData = 'konseling' AND tbl_siga47.tahun = $tahunAkhir
+        THEN tbl_siga47.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_konseling
+
+   
+
+FROM 
+    tbl_kecTebo 
+LEFT JOIN 
+    tbl_siga47 
+ON 
+    tbl_kecTebo.idKec = tbl_siga47.idKec 
+WHERE 
+    tbl_siga47.idKategoriData = '$id_kategori' 
+    AND tbl_siga47.idJudulData = '$id_juduldata' 
+GROUP BY 
+    tbl_kecTebo.namaKec;
+
+
+        ");
+    }
+
+    public function getData48($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+        SELECT 
+        tbl_kecTebo.namaKec,
+        SUM(CASE 
+            WHEN tbl_siga48.nilai AND tbl_siga48.jenisKelamin = 'L' 
+            THEN tbl_siga48.nilai 
+            ELSE 0 
+        END) AS total_nilai_all_L,
+        SUM(CASE 
+            WHEN tbl_siga48.nilai AND tbl_siga48.jenisKelamin = 'P' 
+            THEN tbl_siga48.nilai 
+            ELSE 0 
+        END) AS total_nilai_all_P
+        
+        FROM 
+            tbl_kecTebo 
+        LEFT JOIN 
+            tbl_siga48 
+        ON 
+            tbl_kecTebo.idKec = tbl_siga48.idKec 
+        WHERE 
+            tbl_siga48.idKategoriData = '$id_kategori' 
+            AND tbl_siga48.idJudulData = '$id_juduldata' 
+        GROUP BY 
+            tbl_kecTebo.namaKec;
+
+
+        ");
+    }
+
+    public function getData49($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+        SELECT 
+        tbl_kecTebo.namaKec,
+        SUM(CASE 
+            WHEN tbl_siga48.nilai AND tbl_siga48.jenisKelamin = 'L' 
+            THEN tbl_siga48.nilai 
+            ELSE 0 
+        END) AS total_nilai_all_L,
+        SUM(CASE 
+            WHEN tbl_siga48.nilai AND tbl_siga48.jenisKelamin = 'P' 
+            THEN tbl_siga48.nilai 
+            ELSE 0 
+        END) AS total_nilai_all_P
+        
+        FROM 
+            tbl_kecTebo 
+        LEFT JOIN 
+            tbl_siga48 
+        ON 
+            tbl_kecTebo.idKec = tbl_siga48.idKec 
+        WHERE 
+            tbl_siga48.idKategoriData = '$id_kategori' 
+            AND tbl_siga48.idJudulData = '$id_juduldata' 
+        GROUP BY 
+            tbl_kecTebo.namaKec;
+
+
+        ");
+    }
+
+    public function getData50($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+     SELECT 
+    tbl_kecTebo.namaKec,
+    SUM(CASE 
+        WHEN tbl_siga50.nilai AND tbl_siga50.jenisKelamin = 'L' AND tbl_siga50.tahun = $tahunAwal
+        THEN tbl_siga50.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_L,
+    SUM(CASE 
+        WHEN tbl_siga50.nilai AND tbl_siga50.jenisKelamin = 'P' AND tbl_siga50.tahun = $tahunAwal
+        THEN tbl_siga50.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_P,
+    SUM(CASE 
+        WHEN tbl_siga50.nilai AND tbl_siga50.jenisKelamin = 'L' AND tbl_siga50.tahun = $tahunAkhir
+        THEN tbl_siga50.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_L,
+    SUM(CASE 
+        WHEN tbl_siga50.nilai AND tbl_siga50.jenisKelamin = 'P' AND tbl_siga50.tahun = $tahunAkhir
+        THEN tbl_siga50.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_P
+FROM 
+    tbl_kecTebo 
+LEFT JOIN 
+    tbl_siga50 
+ON 
+    tbl_kecTebo.idKec = tbl_siga50.idKec 
+WHERE 
+    tbl_siga50.idKategoriData = '$id_kategori' 
+    AND tbl_siga50.idJudulData = '$id_juduldata' 
+GROUP BY 
+    tbl_kecTebo.namaKec;
+
+        ");
+    }
+
+    public function getData51($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+    SELECT 
+    tbl_kecTebo.namaKec,
+    SUM(CASE 
+        WHEN tbl_siga51.nilai AND tbl_siga51.jenisKelamin = 'L' AND tbl_siga51.tahun = $tahunAwal
+        THEN tbl_siga51.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_L,
+    SUM(CASE 
+        WHEN tbl_siga51.nilai AND tbl_siga51.jenisKelamin = 'P' AND tbl_siga51.tahun = $tahunAwal
+        THEN tbl_siga51.nilai 
+        ELSE 0 
+    END) AS total_nilai_awal_P,
+    SUM(CASE 
+        WHEN tbl_siga51.nilai AND tbl_siga51.jenisKelamin = 'L' AND tbl_siga51.tahun = $tahunAkhir
+        THEN tbl_siga51.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_L,
+    SUM(CASE 
+        WHEN tbl_siga51.nilai AND tbl_siga51.jenisKelamin = 'P' AND tbl_siga51.tahun = $tahunAkhir
+        THEN tbl_siga51.nilai 
+        ELSE 0 
+    END) AS total_nilai_akhir_P
+FROM 
+    tbl_kecTebo 
+LEFT JOIN 
+    tbl_siga51 
+ON 
+    tbl_kecTebo.idKec = tbl_siga51.idKec 
+WHERE 
+    tbl_siga51.idKategoriData = '$id_kategori' 
+    AND tbl_siga51.idJudulData = '$id_juduldata' 
+GROUP BY 
+    tbl_kecTebo.namaKec;
+
+
+        ");
+    }
+
+    public function getData52($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+        SELECT 
+            tbl_kecTebo.namaKec,
+            SUM(CASE 
+                WHEN tbl_siga52.nilai AND tbl_siga52.jenisKelamin = 'L' AND tbl_siga52.tahun = $tahunAwal
+                THEN tbl_siga52.nilai 
+                ELSE 0 
+            END) AS total_nilai_awal_L,
+            SUM(CASE 
+                WHEN tbl_siga52.nilai AND tbl_siga52.jenisKelamin = 'P' AND tbl_siga52.tahun = $tahunAwal
+                THEN tbl_siga52.nilai 
+                ELSE 0 
+            END) AS total_nilai_awal_P,
+            SUM(CASE 
+                WHEN tbl_siga52.nilai AND tbl_siga52.jenisKelamin = 'L' AND tbl_siga52.tahun = $tahunAkhir
+                THEN tbl_siga52.nilai 
+                ELSE 0 
+            END) AS total_nilai_akhir_L,
+            SUM(CASE 
+                WHEN tbl_siga52.nilai AND tbl_siga52.jenisKelamin = 'P' AND tbl_siga52.tahun = $tahunAkhir
+                THEN tbl_siga52.nilai 
+                ELSE 0 
+            END) AS total_nilai_akhir_P
+            FROM 
+                tbl_kecTebo 
+            LEFT JOIN 
+                tbl_siga52 
+            ON 
+                tbl_kecTebo.idKec = tbl_siga52.idKec 
+            WHERE 
+                tbl_siga52.idKategoriData = '$id_kategori' 
+                AND tbl_siga52.idJudulData = '$id_juduldata' 
+            GROUP BY 
+                tbl_kecTebo.namaKec;
+        ");
+    }
+
+    public function getData53($id_kategori, $id_juduldata, $tahunAwal, $tahunAkhir)
+    {
+        return $this->db->query("
+        SELECT 
+            tbl_kecTebo.namaKec,
+            SUM(CASE 
+                WHEN tbl_siga53.nilai AND tbl_siga53.jenisKelamin = 'L' AND tbl_siga53.tahun = $tahunAwal
+                THEN tbl_siga53.nilai 
+                ELSE 0 
+            END) AS total_nilai_awal_L,
+            SUM(CASE 
+                WHEN tbl_siga53.nilai AND tbl_siga53.jenisKelamin = 'P' AND tbl_siga53.tahun = $tahunAwal
+                THEN tbl_siga53.nilai 
+                ELSE 0 
+            END) AS total_nilai_awal_P,
+            SUM(CASE 
+                WHEN tbl_siga53.nilai AND tbl_siga53.jenisKelamin = 'L' AND tbl_siga53.tahun = $tahunAkhir
+                THEN tbl_siga53.nilai 
+                ELSE 0 
+            END) AS total_nilai_akhir_L,
+            SUM(CASE 
+                WHEN tbl_siga53.nilai AND tbl_siga53.jenisKelamin = 'P' AND tbl_siga53.tahun = $tahunAkhir
+                THEN tbl_siga53.nilai 
+                ELSE 0 
+            END) AS total_nilai_akhir_P
+        FROM 
+            tbl_kecTebo 
+        LEFT JOIN 
+            tbl_siga53 
+        ON 
+            tbl_kecTebo.idKec = tbl_siga53.idKec 
+        WHERE 
+            tbl_siga53.idKategoriData = '$id_kategori' 
+            AND tbl_siga53.idJudulData = '$id_juduldata' 
+        GROUP BY 
+            tbl_kecTebo.namaKec;
+
+        ");
+    }
+
     // get data 
 }

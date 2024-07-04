@@ -1,5 +1,4 @@
-<div class="modal fade " id="TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>" data-backdrop="static"
-    data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade " id="TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,8 +12,7 @@
             <form action="adminpanel/DataSigaAdmin/SimpanDataSiga" method="POST" enctype="multipart/form-data">
                 <div class="modal-body ">
                     <input hidden type="text" name="idUnitKerja" value="<?php echo $GetDataIdUnit->idUnitKerja ?>">
-                    <input hidden type="text" name="idKategoriData"
-                        value="<?php echo $GetDataIdKategori->idKategoriData ?>">
+                    <input hidden type="text" name="idKategoriData" value="<?php echo $GetDataIdKategori->idKategoriData ?>">
 
                     <input hidden type="text" name="idJudulData" value="<?php echo $GetDataIdJudul->idJudulData ?>">
 
@@ -24,9 +22,9 @@
                             <select required name="idKec" id="kecamatan" class="form-control" style="width:100%;">
                                 <option value="" disabled selected>Pilih Kecamatan...</option>
                                 <?php foreach ($GetDataKec->result() as $row) { ?> ?>
-                                <option value="<?php echo $row->idKec; ?>">
-                                    <?php echo $row->namaKec; ?>
-                                </option>
+                                    <option value="<?php echo $row->idKec; ?>">
+                                        <?php echo $row->namaKec; ?>
+                                    </option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -76,17 +74,17 @@
 </div>
 <?php $this->load->view('admin/tools/js_footer'); ?>
 <script type="text/javascript">
-$('#kecamatan').select2({
-    dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
-    placeholder: "Pilih Kec..."
-});
-$('#jenisData').select2({
-    dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
-    placeholder: "Pilih..."
-});
+    $('#kecamatan').select2({
+        dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
+        placeholder: "Pilih Kec..."
+    });
+    $('#jenisData').select2({
+        dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
+        placeholder: "Pilih..."
+    });
 
-$('#tahun').select2({
-    dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
-    placeholder: "Pilih Tahun..."
-});
+    $('#tahun').select2({
+        dropdownParent: $('#TambahDataSigatbl<?= $GetDataIdJudul->formatTabel ?>'),
+        placeholder: "Pilih Tahun..."
+    });
 </script>

@@ -57,7 +57,7 @@
                     <div class="card-body hasilajax table-responsive">
                         <?php
                         $found = false; // flag untuk menandai apakah kecocokan ditemukan
-                        for ($i = 2; $i <= 52; $i++) {
+                        for ($i = 2; $i <= 53; $i++) {
                             if ($GetDataIdJudul->formatTabel == (string)$i) {
                                 $file_path = 'lending/FormatTabel/tbl' . $i . '.php';
 
